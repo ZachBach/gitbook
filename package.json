@@ -6,7 +6,9 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.17.1",
-    "mongoose": "^5.9.16"
+    "mongodb": "^3.5.8",
+    "mongoose": "^5.9.16",
+    "passport": "^0.4.1"
   },
   "devDependencies": {},
   "scripts": {

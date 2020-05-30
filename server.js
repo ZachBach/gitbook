@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require("express-session");
+const passport = require("./config/passport");
 const mongoose = require('mongoose');
 const apiRoutes = require('./routes/apiRoutes');
 const app = express();
@@ -12,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
 
+app.use(routes);
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/gitbook', {
   useUnifiedTopology: true,
@@ -27,6 +30,11 @@ app.use('/api', apiRoutes);
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
+
+
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.sessions());
 
 // Start the API server
 app.listen(PORT, function () {

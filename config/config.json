@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "Brian123",
+    "password": "Brian123",
+    "database": "User",
+    "host": "127.0.0.1",
+    "port": 2002,
+    "dialect": "mongodb"
+  },
+  "test": {
+    "username": "root",
+    "password": "password",
+    "database": "User",
+    "host": "127.0.0.1",
+    "port": 3001,
+    "dialect": "mysql"
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "host": "l6slz5o3eduzatkw.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "username": "su7ttr2pp64bvnqs",
+    "password": "f72jeu7oo3rddq2g",
+    "database": "zpweumxjkrngbhjb",
+    "dialect": "mysql"
+  }
+}
