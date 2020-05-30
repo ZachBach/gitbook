@@ -1,8 +1,31 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import InputContext from '../../context/input/inputContext'
+import axios from 'axios';
 import '../styles/SignUp.css';
 
-function SignUp() {
+const SignUp = () => {
+  const [ signup, setSignup ] = useState([])
+  const inputContext = useContext(InputContext);
+
+  const [state, setState] = useState('');
+
+  const onChange = (e) => {
+      const value = e.target.value;
+      setState({
+        ...state, 
+        [e.target.name]: value
+      });    
+    }
+
+    const onSubmit = () => {
+      axios.post('/api/signup', { state })
+        .then(res => 
+          console.log(res))
+        .catch(err => console.log(err))
+    }
+
+
   return (
     <section className='container-fluid'>
       <section className='row'>
@@ -12,6 +35,9 @@ function SignUp() {
             <label>First name</label>
             <input
               type='text'
+              name='firstName'
+              value={state.firstName}
+              onChange={onChange}
               className='form-control'
               placeholder='First name'
             />
@@ -21,6 +47,9 @@ function SignUp() {
             <label>Last name</label>
             <input
               type='text'
+              name='lastName'
+              value={state.lastName}
+              onChange={onChange}
               className='form-control'
               placeholder='Last name'
             />
@@ -29,6 +58,8 @@ function SignUp() {
             <label htmlFor='exampleInputEmail1'>Email address</label>
             <input
               type='email'
+              email='text'
+              onChange={onChange}
               className='form-control'
               id='exampleInputEmail1'
               aria-describedby='emailHelp'
@@ -41,21 +72,13 @@ function SignUp() {
             <label htmlFor='exampleInputPassword1'>Password</label>
             <input
               type='password'
+              password='text'
+              onChange={onChange}
               className='form-control'
               id='exampleInputPassword1'
             />
           </div>
-          <div className='form-group form-check'>
-            <input
-              type='checkbox'
-              className='form-check-input'
-              id='exampleCheck1'
-            />
-            <label className='form-check-label' htmlFor='exampleCheck1'>
-              Check me out
-            </label>
-          </div>
-          <button type='submit' className='btn '>
+          <button type='submit' onSubmit={onSubmit} className='btn '>
             Sign Up
           </button>
           <button type='submit' className='btn '>
