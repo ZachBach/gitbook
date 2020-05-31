@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "express and backend server",
   "main": "server.js",
+  "proxy": "http://localhost:3000",
   "dependencies": {
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongodb": "^3.5.8",
     "mongoose": "^5.9.16",
