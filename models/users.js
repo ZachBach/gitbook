@@ -22,11 +22,6 @@ module.exports = function (sequelize, DataTypes) {
       validate: {
         len: { args: [6, 12], msg: "Must be 6-12 characters" }
       }
-    },
-    user_dob: {
-      type: DataTypes.DATEONLY,
-      // allowNull: false,
-      default: "1999-01-01",
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database

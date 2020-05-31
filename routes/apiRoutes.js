@@ -8,15 +8,30 @@ router.get('/users', (req, res) => {
   }).then(() => console.log(req.params.q));
 })
 
-router.post('/api/signup', ({body}, res) => {
-  db.Signupuser.create(body)
-    .then(
-    newuser => {
+router.create('/api/signup', (req, res) => {
+  db.Signupuser.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+  })
+    .then((newuser) => {
       res.json(newuser);
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(404).json(err);
     });
-})
+});
+
+// router.post('/api/signup', ({body}, res) => {
+//   db.Signupuser.create(body)
+//     .then(
+//     newuser => {
+//       res.json(newuser);
+//     })
+//     .catch(err => {
+//       res.status(404).json(err);
+//     });
+// })
 
 module.exports = router;
