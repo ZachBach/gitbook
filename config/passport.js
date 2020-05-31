@@ -1,34 +1,37 @@
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
-var db = require("../models");
+var db = require('../models');
 
-passport.use(new LocalStrategy(
-  {
-    usernameField: "username",
-    emailField: "email"
-  },
-  function (email, password, done) {
-    db.user.findOne({
-      where: {
-        username: username,
-        email: email
-      }
-    }).then(function (dbUser) {
-      if(!dbUser) {
-        return done(null, false, {
-          message: "Incorrect email."
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'username',
+      emailField: 'email',
+    },
+    function (email, password, done) {
+      db.user
+        .findOne({
+          where: {
+            username: username,
+            email: email,
+          },
+        })
+        .then(function (dbUser) {
+          if (!dbUser) {
+            return done(null, false, {
+              message: 'Incorrect email.',
+            });
+          } else if (!dbUser.validPassword(password)) {
+            return done(null, false, {
+              message: 'Incorrect password.',
+            });
+          }
+          return done(null, dbUser);
         });
-      }
-      else if (!dbUser.validPassword(password)) {
-        return done(null, false, {
-          message: "Incorrect password."
-        });
-      }
-      return done(null, dbUser);
-    })
-  }
-));
+    }
+  )
+);
 
 passport.serializeUser(function (user, cb) {
   cb(null, user);

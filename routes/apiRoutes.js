@@ -1,22 +1,17 @@
-const router = require('express').Router();
-const db = require('../models');
+import router from 'express';
 
+app.get('/auth/github', passport.authenticate('github'), function (req, res) {
+  // The request will be redirected to GitHub for authentication, so this
+  // function will not be called.
+});
 
-router.get('/users', (req, res) => {
-  db.User.find({
-    username: { $regex: new RegExp(req.query.q, 'i') },
-  }).then(() => console.log(req.params.q));
-})
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/home');
+  }
+);
 
-router.post('/api/signup', ({body}, res) => {
-  db.Signupuser.create(body)
-    .then(
-    newuser => {
-      res.json(newuser);
-    })
-    .catch(err => {
-      res.status(404).json(err);
-    });
-})
-
-module.exports = router;
+export default router;
