@@ -1,12 +1,41 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+'use strict';
 
-const signupuserSchema = new Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  date: { type: Date, default: Date.now },
+var fs = require('fs');
+var path = require('path');
+var Sequelize = require('sequelize');
+var basename = path.basename(module.filename);
+var env = process.env.NODE_ENV || 'development';
+var config = require(__dirname + '/../config/config.json')[env];
+var db = {};
+
+if (config.use_env_variable) {
+  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+} else {
+  var sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+  );
+}
+
+fs.readdirSync(__dirname)
+  .filter(function (file) {
+    return (
+      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
+    );
+  })
+  .forEach(function (file) {
+    var model = sequelize['import'](path.join(__dirname, file));
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(function (modelName) {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
 });
 
-const Signupuser = mongoose.model('signupuser', signupuserSchema);
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-module.exports = Signupuser;
+module.exports = db;
