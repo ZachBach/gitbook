@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
+const passport = require('passport');
 // const passport = require('./config/GithubPassport2');
 const apiRoutes = require('./routes/apiRoutes');
 const db = require('./models');
@@ -9,6 +10,11 @@ const cors = require('cors');
 
 const PORT = process.env.PORT || 3001;
 
+app.use(
+  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -26,17 +32,52 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+const GitHubStrategy = require('passport-github2').Strategy;
+
+const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
+const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
+const GITHUB_CALLBACK_URL = '/auth/github/callback';
+
+passport.use(
+  new GitHubStrategy(
+    {
+      clientID: GITHUB_CLIENT_ID,
+      clientSecret: GITHUB_CLIENT_SECRET,
+      callbackURL: GITHUB_CALLBACK_URL,
+    },
+    function (accessToken, refreshToken, profile, cb) {
+      console.log(accessToken, refreshToken, profile);
+      return cb(null, profile);
+    }
+  )
+);
+
+app.get(
+  '/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] })
+);
+
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('http://localhost:3000/home');
+  }
+);
+passport.serializeUser(function (user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function (obj, cb) {
+  cb(null, obj);
+});
+
 // Define Routes
 // app.use('/api/users', require('./routes/api/users'));
 // app.use('/api/auth', require('./routes/api/auth'));
 // app.use('/api/profile', require('./routes/api/profile'));
 // app.use('/api/posts', require('./routes/api/posts'));
-
-app.use(
-  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
-);
-// app.use(passport.initialize());
-// app.use(passport.sessions());
 
 app.use(
   cors({
@@ -47,7 +88,7 @@ app.use(
 );
 
 // Use apiRoutes
-app.use('/api', apiRoutes);
+app.use('/', apiRoutes);
 
 //  Send every request to the React app
 
