@@ -1,9 +1,10 @@
 const express = require('express');
 const session = require('express-session');
-const passport = require('./config/GithubPassport2');
+const path = require('path');
+// const passport = require('./config/GithubPassport2');
 const apiRoutes = require('./routes/apiRoutes');
-const app = express();
 const db = require('./models');
+const app = express();
 const cors = require('cors');
 
 const PORT = process.env.PORT || 3001;
@@ -14,13 +15,28 @@ app.use(express.json());
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
+
+  // app.get('*', (req, res) => {
+  //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  // });
+
+  // Define any API routes before this runs
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+  });
 }
+
+// Define Routes
+// app.use('/api/users', require('./routes/api/users'));
+// app.use('/api/auth', require('./routes/api/auth'));
+// app.use('/api/profile', require('./routes/api/profile'));
+// app.use('/api/posts', require('./routes/api/posts'));
 
 app.use(
   session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
 );
-app.use(passport.initialize());
-app.use(passport.sessions());
+// app.use(passport.initialize());
+// app.use(passport.sessions());
 
 app.use(
   cors({
@@ -34,10 +50,6 @@ app.use(
 app.use('/api', apiRoutes);
 
 //  Send every request to the React app
-// Define any API routes before this runs
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
-});
 
 // Start the API server
 db.sequelize.sync().then(function () {
