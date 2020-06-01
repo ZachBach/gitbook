@@ -7,8 +7,8 @@ router.get('/users', (req, res) => {
   }).then(() => console.log(req.params.q));
 });
 
-router.create('/api/signup', (req, res) => {
-  db.Signupuser.create({
+router.post('/api/signup', (req, res) => {
+  db.users.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -22,18 +22,18 @@ router.create('/api/signup', (req, res) => {
     });
 });
 
-router.get(
-  '/auth/github',
-  passport.authenticate('github', { scope: ['user:email'] })
-);
+// router.get(
+//   '/auth/github',
+//   passport.authenticate('github', { scope: ['user:email'] })
+// );
 
-router.get(
-  callbackURL,
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function (req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/home');
-  }
-);
+// router.get(
+//   callbackURL,
+//   passport.authenticate('github', { failureRedirect: '/login' }),
+//   function (req, res) {
+//     // Successful authentication, redirect home.
+//     res.redirect('/home');
+//   }
+// );
 
 module.exports = router;
