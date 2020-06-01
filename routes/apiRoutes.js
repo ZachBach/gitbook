@@ -8,12 +8,13 @@ router.get('/users', (req, res) => {
 });
 
 router.post('/api/signup', (req, res) => {
-  db.users.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password,
-  })
+  db.users
+    .create({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      password: req.body.password,
+    })
     .then((newuser) => {
       res.json(newuser);
     })
@@ -28,7 +29,7 @@ router.post('/api/signup', (req, res) => {
 // );
 
 // router.get(
-//   callbackURL,
+//   '/auth/github/callback',
 //   passport.authenticate('github', { failureRedirect: '/login' }),
 //   function (req, res) {
 //     // Successful authentication, redirect home.
