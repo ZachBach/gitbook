@@ -22,20 +22,17 @@ router.create('/api/signup', (req, res) => {
     });
 });
 
-router.get('/auth/github', passport.authenticate('github'), function (
-  req,
-  res
-) {
-  // The request will be redirected to GitHub for authentication, so this
-  // function will not be called.
-});
+router.get(
+  '/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] })
+);
 
 router.get(
-  '/auth/github/callback',
+  callbackURL,
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/home');
   }
 );
 
