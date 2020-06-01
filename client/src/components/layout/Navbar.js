@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const Navbar = ({ icon, title }) => {
   return (
@@ -13,7 +13,7 @@ const Navbar = ({ icon, title }) => {
           <Link to='/home'>Home</Link>
         </li>
         <li>
-          <Link to='/login'>Login</Link>
+          <Link to='/login'>Login </Link>
         </li>
         <li>
           <Link to='/'>Sign up</Link>
