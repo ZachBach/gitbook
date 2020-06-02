@@ -1,7 +1,5 @@
 const passport = require('passport');
 const app = require('express');
-// const GitHubStrategy = require('passport-github2').Strategy;
-
 const GitHubStrategy = require('passport-github2').Strategy;
 
 const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
@@ -43,4 +41,4 @@ passport.deserializeUser(function (obj, cb) {
   cb(null, obj);
 });
 
-// module.exports = GitHubStrategy;
+module.exports = GitHubStrategy;

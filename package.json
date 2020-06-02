@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "express and backend server",
   "main": "server.js",
-  "proxy": "http://localhost:3000",
   "dependencies": {
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
