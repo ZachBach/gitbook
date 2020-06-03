@@ -3,9 +3,8 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 function SignIn({ icon }) {
-  const handleClick = (event) => {
-    event.preventDefault();
-    axios.get('localhost:3001/auth/github').then((response) => {
+  const handleClick = async () => {
+    await axios.get('localhost:3001/auth/github').then((response) => {
       console.log(response);
       return response.json;
     });

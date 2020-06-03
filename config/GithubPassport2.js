@@ -33,6 +33,7 @@ app.get(
     res.redirect('http://localhost:3000/home');
   }
 );
+
 passport.serializeUser(function (user, cb) {
   cb(null, user);
 });
