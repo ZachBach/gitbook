@@ -20,7 +20,7 @@ passport.use(
   )
 );
 
-app.get(
+app.post(
   '/auth/github',
   passport.authenticate('github', { scope: ['user:email'] })
 );

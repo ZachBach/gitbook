@@ -8,6 +8,7 @@ import Home from './components/pages/Home';
 import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
+import Wall from './components/pages/Wall'
 
 import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
@@ -25,6 +26,7 @@ const App = () => {
               <Alert />
               <Switch>
                 <Route exact path='/' component={SignUp} />
+                <Route exact path='/Wall' component={Wall} />
                 <Route exact path='/login' component={SignIn} />
                 <Route exact path='/home' component={Home} />
                 <Route exact path='/about' component={About} />

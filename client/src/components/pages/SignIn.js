@@ -3,25 +3,18 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 function SignIn({ icon }) {
-  const handleClick = async () => {
-    await axios.get('localhost:3001/auth/github').then((response) => {
-      console.log(response);
-      return response.json;
-    });
-  };
-
   return (
     <section className='container-fluid'>
       <section className='row'>
         <section className='col-12 col-sm-6 col-md-3' />
 
         <div className='form-group'></div>
-        <button
+        <a
           className={icon}
-          onClick={handleClick}
+          href={'localhost:3001/auth/github'}
           style={{ paddingLeft: '40px' }}>
           &nbsp; Sign in with Github
-        </button>
+        </a>
       </section>
     </section>
   );
