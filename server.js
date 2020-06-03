@@ -3,6 +3,7 @@ const session = require('express-session');
 const path = require('path');
 const passport = require('passport');
 // const passport = require('./config/GithubPassport2');
+const GitHubStrategy = require('passport-github2').Strategy;
 const apiRoutes = require('./routes/apiRoutes');
 const db = require('./models');
 const app = express();
@@ -15,11 +16,11 @@ app.use(express.json());
 
 app.use(passport.initialize());
 app.use(passport.session());
-   
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-
+}
   // Define Routes
   // app.use('/api/users', require('./routes/api/users'));
   // app.use('/api/auth', require('./routes/api/auth'));
@@ -29,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   // Use apiRoutes
   const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
   const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
-  const GITHUB_CALLBACK_URL = '/auth/github/callback';
+  const GITHUB_CALLBACK_URL = "http://127.0.0.1:3001/auth/github/callback"
 
   passport.use(
     new GitHubStrategy(
@@ -55,11 +56,7 @@ if (process.env.NODE_ENV === 'production') {
 
   app.get(
     '/auth/github',
-    function (req, res) {
-      console.log(req.body);
-      res.send('Hello');
-    }
-    //passport.authenticate('github', { scope: ['user:email'] })
+    passport.authenticate('github', { scope: ['user:email'] })
   );
 
   app.get(
@@ -67,7 +64,7 @@ if (process.env.NODE_ENV === 'production') {
     passport.authenticate('github', { failureRedirect: '/login' }),
     function (req, res) {
       // Successful authentication, redirect home.
-      res.redirect('http://localhost:3000/home');
+      res.redirect('http://127.0.0.1:3000/home');
     }
   );
 
