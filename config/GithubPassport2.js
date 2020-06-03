@@ -20,7 +20,7 @@ passport.use(
   )
 );
 
-app.get(
+app.post(
   '/auth/github',
   passport.authenticate('github', { scope: ['user:email'] })
 );
@@ -33,6 +33,7 @@ app.get(
     res.redirect('http://localhost:3000/home');
   }
 );
+
 passport.serializeUser(function (user, cb) {
   cb(null, user);
 });
