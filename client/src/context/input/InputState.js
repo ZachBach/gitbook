@@ -24,7 +24,7 @@ const InputState = (props) => {
   //   Sign Up Users
   const signUp = async (text) => {
     setLoading();
-  
+
     dispatch({
       type: SIGN_UP,
       payload: res.data.items,
