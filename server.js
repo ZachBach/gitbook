@@ -6,49 +6,78 @@ const passport = require('passport');
 const apiRoutes = require('./routes/apiRoutes');
 const db = require('./models');
 const app = express();
-const cors = require('cors');
 
 const PORT = process.env.PORT || 3001;
 
-app.use(
-  session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })
-);
-app.use(passport.initialize());
-app.use(passport.session());
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(passport.initialize());
+app.use(passport.session());
+   
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 
-  // app.get('*', (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  // });
+  // Define Routes
+  // app.use('/api/users', require('./routes/api/users'));
+  // app.use('/api/auth', require('./routes/api/auth'));
+  // app.use('/api/profile', require('./routes/api/profile'));
+  // app.use('/api/posts', require('./routes/api/posts'));
 
-  // Define any API routes before this runs
-  app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
+  // Use apiRoutes
+  const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
+  const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
+  const GITHUB_CALLBACK_URL = '/auth/github/callback';
+
+  passport.use(
+    new GitHubStrategy(
+      {
+        clientID: GITHUB_CLIENT_ID,
+        clientSecret: GITHUB_CLIENT_SECRET,
+        callbackURL: GITHUB_CALLBACK_URL,
+      },
+      function (accessToken, refreshToken, profile, cb) {
+        console.log(accessToken, refreshToken, profile);
+        return cb(null, profile);
+      }
+    )
+  );
+
+  passport.serializeUser(function (user, cb) {
+    cb(null, user);
   });
-}
 
-// Define Routes
-// app.use('/api/users', require('./routes/api/users'));
-// app.use('/api/auth', require('./routes/api/auth'));
-// app.use('/api/profile', require('./routes/api/profile'));
-// app.use('/api/posts', require('./routes/api/posts'));
+  passport.deserializeUser(function (obj, cb) {
+    cb(null, obj);
+  });
 
-app.use(
-  cors({
-    origin: 'http://localhost:3001', // allow to server to accept request from different origin
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,FETCH',
-    credentials: true, // allow session cookie from browser to pass through
-  })
-);
+  app.get(
+    '/auth/github',
+    function (req, res) {
+      console.log(req.body);
+      res.send('Hello');
+    }
+    //passport.authenticate('github', { scope: ['user:email'] })
+  );
 
-// Use apiRoutes
-app.use('/', apiRoutes);
+  app.get(
+    '/auth/github/callback',
+    passport.authenticate('github', { failureRedirect: '/login' }),
+    function (req, res) {
+      // Successful authentication, redirect home.
+      res.redirect('http://localhost:3000/home');
+    }
+  );
 
+//   app.use('/', apiRoutes);
+
+//   // Define any API routes before this runs
+//   app.get('*', function (req, res) {
+//     res.sendFile(path.join(__dirname, './client/build/index.html'));
+//   });
+// }
 //  Send every request to the React app
 
 // Start the API server
