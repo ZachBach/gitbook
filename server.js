@@ -1,5 +1,5 @@
 const express = require('express');
-const session = require('express-session');
+const connectDB = require('./config/db')
 const path = require('path');
 const passport = require('passport');
 // const passport = require('./config/GithubPassport2');
@@ -10,9 +10,14 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
+//connect to the database
+connectDB();
+
+app.get('/', (req, res) => res.send('API running'))
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({ extended: false }));
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -68,18 +73,22 @@ app.get(
   }
 );
 
-//   app.use('/', apiRoutes);
+  app.use('/', apiRoutes);
 
-//   // Define any API routes before this runs
-//   app.get('*', function (req, res) {
-//     res.sendFile(path.join(__dirname, './client/build/index.html'));
-//   });
-// }
+  app.use('/api/signup', apiRoutes);
+
+  // Define any API routes before this runs
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
+  });
+
 //  Send every request to the React app
 
 // Start the API server
 db.sequelize.sync().then(function () {
-  app.listen(PORT, function () {
+  
+  app.listen(PORT, () => {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
   });
-});
+})
+  
