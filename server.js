@@ -21,7 +21,6 @@ app.use(passport.session());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
-<<<<<<< HEAD
 // Define Routes
 // app.use('/api/users', require('./routes/api/users'));
 // app.use('/api/auth', require('./routes/api/auth'));
@@ -31,19 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 // Use apiRoutes
 const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
 const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
-const GITHUB_CALLBACK_URL = '/auth/github/callback';
-=======
-  // Define Routes
-  // app.use('/api/users', require('./routes/api/users'));
-  // app.use('/api/auth', require('./routes/api/auth'));
-  // app.use('/api/profile', require('./routes/api/profile'));
-  // app.use('/api/posts', require('./routes/api/posts'));
-
-  // Use apiRoutes
-  const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
-  const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
-  const GITHUB_CALLBACK_URL = "http://127.0.0.1:3001/auth/github/callback"
->>>>>>> 19dbfd7e3ffcde9dffa494a2847595c1c72575db
+const GITHUB_CALLBACK_URL = "http://127.0.0.1:3001/auth/github/callback"
 
 passport.use(
   new GitHubStrategy(
@@ -67,14 +54,9 @@ passport.deserializeUser(function (obj, cb) {
   cb(null, obj);
 });
 
-<<<<<<< HEAD
 app.get(
   '/auth/github',
-  function (req, res) {
-    console.log(req.body);
-    res.send('Hello');
-  }
-  //passport.authenticate('github', { scope: ['user:email'] })
+  passport.authenticate('github', { scope: ['user:email'] })
 );
 
 app.get(
@@ -82,24 +64,9 @@ app.get(
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/home');
+    res.redirect('http://127.0.0.1:3000/home');
   }
 );
-=======
-  app.get(
-    '/auth/github',
-    passport.authenticate('github', { scope: ['user:email'] })
-  );
-
-  app.get(
-    '/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/login' }),
-    function (req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('http://127.0.0.1:3000/home');
-    }
-  );
->>>>>>> 19dbfd7e3ffcde9dffa494a2847595c1c72575db
 
 //   app.use('/', apiRoutes);
 

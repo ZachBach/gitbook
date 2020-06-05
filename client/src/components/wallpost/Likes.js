@@ -2,7 +2,9 @@ import React from "react"
 
 const Likes = () => {
     return (
-        <div>Like</div>
+        <div className="col-4">
+            <button type="button" class="btn btn-primary">Like</button>
+        </div>
     )
 }
 
