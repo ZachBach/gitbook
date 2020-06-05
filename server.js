@@ -26,17 +26,16 @@ app.use(passport.session());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
+// Define Routes
+// app.use('/api/users', require('./routes/api/users'));
+// app.use('/api/auth', require('./routes/api/auth'));
+// app.use('/api/profile', require('./routes/api/profile'));
+// app.use('/api/posts', require('./routes/api/posts'));
 
-  // Define Routes
-  // app.use('/api/users', require('./routes/api/users'));
-  // app.use('/api/auth', require('./routes/api/auth'));
-  // app.use('/api/profile', require('./routes/api/profile'));
-  // app.use('/api/posts', require('./routes/api/posts'));
-
-  // Use apiRoutes
-  const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
-  const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
-  const GITHUB_CALLBACK_URL = "http://127.0.0.1:3001/auth/github/callback"
+// Use apiRoutes
+const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
+const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
+const GITHUB_CALLBACK_URL = "http://127.0.0.1:3001/auth/github/callback"
 
 passport.use(
   new GitHubStrategy(
@@ -60,19 +59,19 @@ passport.deserializeUser(function (obj, cb) {
   cb(null, obj);
 });
 
-  app.get(
-    '/auth/github',
-    passport.authenticate('github', { scope: ['user:email'] })
-  );
+app.get(
+  '/auth/github',
+  passport.authenticate('github', { scope: ['user:email'] })
+);
 
-  app.get(
-    '/auth/github/callback',
-    passport.authenticate('github', { failureRedirect: '/login' }),
-    function (req, res) {
-      // Successful authentication, redirect home.
-      res.redirect('http://127.0.0.1:3000/home');
-    }
-  );
+app.get(
+  '/auth/github/callback',
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function (req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('http://127.0.0.1:3000/home');
+  }
+);
 
   app.use('/', apiRoutes);
 
