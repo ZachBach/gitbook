@@ -2,7 +2,9 @@ import React from "react"
 
 const Reply = () => {
     return (
-        <div>link to replies</div>
+        <div className="col-4">
+            <a class="btn btn-primary" href="#" role="button">Reply</a>
+        </div>
     )
 }
 
