@@ -41,7 +41,7 @@ const SignUp = () => {
   // }
 
   const onsubmit = (event) => {
-    alert('hello');
+    event.preventDefault();
     // const { firstName, lastName, email } = state.value;
     // get form data out of state
     var newUser = {
