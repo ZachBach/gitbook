@@ -13,13 +13,6 @@ router.get('/users', (req, res) => {
   }).then(() => console.log(req.params.q));
 });
 
-
-router.post('/signup', function (req, res) {
-  console.log("i will donate half of my first donut to Wills second child")
-  console.log(req.body)
-});
-
-
 router.post('/',
   async (req, res) => {
     const errors = validationResult(req);
@@ -75,14 +68,18 @@ router.post('/',
 //   }
 // )
 
-router.get('/api/signup', (req, res) => {
+// router.post('/signup', function (req, res) {
+//   console.log('i will donate half of my first donut to Wills second child');
+//   console.log(req.body);
+// });
+
+router.post('/api/signup', (req, res) => {
   console.log('in the post')
-  db.users
+  db.User
     .create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
-      email: req.body.email,
-      password: req.body.password,
+      email: req.body.email
     })
     .then((newuser) => {
       res.json(newuser);
