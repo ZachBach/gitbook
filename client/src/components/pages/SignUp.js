@@ -9,6 +9,9 @@ const SignUp = () => {
   const inputContext = useContext(InputContext);
 
   const [state, setState] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
 
   const onChange = (e) => {
     const value = e.target.value;
@@ -20,10 +23,9 @@ const SignUp = () => {
 
 
 
-  // const onSubmit = (e) => {
-  //   e.preventDefault();
+  // const onSubmit = (event) => {
+  //   event.preventDefault();
   //   // get our form data out of state
-  //   const { firstName, lastName, email } = state.value;
   //   router.post('localhost:3001/signup', { firstName, lastName, email }).then((result) => {
   //     //access the results here....
   //     console.log(result)
@@ -38,12 +40,18 @@ const SignUp = () => {
   //     })
   // }
 
-  const onsubmit = (e) => {
-    e.preventDefault();
-    console.log('hello');
+  const onsubmit = (event) => {
+    alert('hello');
+    // const { firstName, lastName, email } = state.value;
     // get form data out of state
-    fetch('/signup', {
+    var newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+    };
+    fetch('/api/signup', {
       method: 'POST',
+      body: JSON.stringify(newUser),
       headers: {
         'Content-type': 'application/json',
       }}).then((result) => {
@@ -86,6 +94,7 @@ const SignUp = () => {
             <input
               type='email'
               email='text'
+              value={state.email}
               onChange={onChange}
               className='form-control'
               id='exampleInputEmail1'
