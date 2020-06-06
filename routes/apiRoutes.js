@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
-const auth = require('../config/middleware/auth')
-
 const db = require('../models');
 
 router.get('/api/signup', (req, res) => res.send('Profile route'));
