@@ -45,15 +45,16 @@ const SignUp = () => {
     // const { firstName, lastName, email } = state.value;
     // get form data out of state
     var newUser = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email
+      firstName: state.firstName,
+      lastName: state.lastName,
+      email: state.email
     };
     fetch('/api/signup', {
       method: 'POST',
       body: JSON.stringify(newUser),
       headers: {
         'Content-type': 'application/json',
+        'Accept': 'application/json',
       }}).then((result) => {
         console.log(result);
       }).then(data => {
@@ -92,8 +93,8 @@ const SignUp = () => {
           <div className='form-group'>
             <label htmlFor='exampleInputEmail1'>Email address</label>
             <input
-              type='email'
-              email='text'
+              type='text'
+              name='email'
               value={state.email}
               onChange={onChange}
               className='form-control'
