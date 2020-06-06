@@ -14,8 +14,6 @@
     "express-validator": "^6.5.0",
     "gravatar": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
-    "mongodb": "^3.5.8",
-    "mongoose": "^5.9.17",
     "mysql": "^2.18.1",
     "mysql2": "^2.1.0",
     "nodemon": "^2.0.4",

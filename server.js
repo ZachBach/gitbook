@@ -1,5 +1,6 @@
 const express = require('express');
-const connectDB = require('./config/db')
+// const connection = require('./config/db')
+const session = require('express-session');
 const path = require('path');
 const passport = require('passport');
 // const passport = require('./config/GithubPassport2');
@@ -10,8 +11,8 @@ const app = express();
 
 const PORT = process.env.PORT || 3001;
 
-//connect to the database
-connectDB();
+// //connect to the database
+// connection();
 
 app.get('/', (req, res) => res.send('API running'))
 
@@ -89,9 +90,8 @@ app.get(
 
 //  Send every request to the React app
 
-// Require apiRoutes
-require('./routes/apiRoutes.js')(app);
-require('./routes/authRoutes.js')(app);
+// // Require apiRoutes
+// require('./routes/apiRoutes.js')(app);
 
 
 // Start the API server
