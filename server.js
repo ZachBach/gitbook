@@ -1,13 +1,16 @@
 const express = require('express');
 // const connection = require('./config/db')
 const session = require('express-session');
+const bodyParser = require('body-parser');
 const path = require('path');
 const passport = require('passport');
 // const passport = require('./config/GithubPassport2');
 const GitHubStrategy = require('passport-github2').Strategy;
 const apiRoutes = require('./routes/apiRoutes');
 const db = require('./models');
+
 const app = express();
+app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3001;
 
@@ -96,7 +99,7 @@ app.get(
 
 // Start the API server
 db.sequelize.sync().then(function () {
-  
+  // require('./db/seed')(db);
   app.listen(PORT, () => {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
   });
