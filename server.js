@@ -17,8 +17,13 @@ app.get('/', (req, res) => res.send('API running'))
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json({ extended: false }));
+app.use(express.json());
+// app.use(express.static("public"));
 
+// Keep track of our user's login status
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -83,6 +88,11 @@ app.get(
   });
 
 //  Send every request to the React app
+
+// Require apiRoutes
+require('./routes/apiRoutes.js')(app);
+require('./routes/authRoutes.js')(app);
+
 
 // Start the API server
 db.sequelize.sync().then(function () {
