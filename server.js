@@ -98,9 +98,16 @@ app.get(
 
 
 // Start the API server
+<<<<<<< HEAD
+db.sequelize.sync()
+.then(function () {
+  require('./db/seeds')(db)
+=======
 db.sequelize.sync().then(function () {
   // require('./db/seed')(db);
+>>>>>>> 9d4c86ab113a5a973fd417062f8581e92d53b757
   app.listen(PORT, () => {
+
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
   });
 })

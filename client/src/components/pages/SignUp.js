@@ -44,31 +44,21 @@ const SignUp = () => {
     event.preventDefault();
     // const { firstName, lastName, email } = state.value;
     // get form data out of state
-    // var newUser = {
-    //   firstName: state.firstName,
-    //   lastName: state.lastName,
-    //   email: state.email
-    // };
+    var newUser = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email
+    };
     fetch('/api/signup', {
       method: 'POST',
-      // body: JSON.stringify(newUser),
+      body: JSON.stringify(newUser),
       headers: {
         'Content-type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify({
-        firstName: state.firstName,
-        lastName: state.lastName,
-        email: state.email,
-      }),
-    })
-      .then((result) => {
+      }}).then((result) => {
         console.log(result);
-        result.json();
+      }).then(data => {
+        console.log(data)
       })
-      .then((data) => {
-        console.log(data);
-      });
   };
   
   return (

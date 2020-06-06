@@ -69,10 +69,10 @@ router.get('/users', (req, res) => {
 //   console.log(req.body);
 // });
 
-router.post('/api/signup', (req, res) => {
-  console.log(req.body);
+router.post('/api/signup', async (req, res) => {
+  console.log(req.body)
   console.log('in the post')
-    db.User
+  await db.User
     .create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
