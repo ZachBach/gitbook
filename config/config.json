@@ -1,10 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": "NewPassword",
+    "password": "es915696",
     "database": "users_db",
     "host": "127.0.0.1",
-    "port": 2002,
+    "port": 3306,
     "dialect": "mysql"
   },
   "test": {
@@ -12,7 +12,7 @@
     "password": "password",
     "database": "users_db",
     "host": "127.0.0.1",
-    "port": 3001,
+    "port": 33006,
     "dialect": "mysql"
   },
   "production": {
