@@ -3,15 +3,15 @@ module.exports = function (sequelize, DataTypes) {
     user_id: {
       type: DataTypes.INTEGER,
     },
-    firstName: {
-      type: DataTypes.STRING,
-    },
-    lastName: {
+    name: {
       type: DataTypes.STRING,
     },
     user_name: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: true
+    },
+    avatar: {
+      type: DataTypes.STRING,
     },
     email: {
       type: DataTypes.STRING,
@@ -21,14 +21,12 @@ module.exports = function (sequelize, DataTypes) {
         isEmail: true,
       },
     },
-    // The password cannot be null
-    password: {
+    bio: {
       type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        len: { args: [6, 12], msg: 'Must be 6-12 characters' },
-      },
     },
+    profile: {
+      type: DataTypes.STRING,
+    },    
   });
   return User;
 };
