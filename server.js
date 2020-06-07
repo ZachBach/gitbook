@@ -54,12 +54,35 @@ passport.use(
       callbackURL: GITHUB_CALLBACK_URL,
     },
     function (accessToken, refreshToken, profile, cb) {
-      console.log(accessToken, refreshToken, profile);
-      return cb(null, profile);
+      gitHub(profile)
+/*       console.log(accessToken, refreshToken, profile);
+ */      return cb(null, profile);
     }
   )
 );
 
+ const gitHub = async (profileData) => {
+  console.log('----------------------------------------')
+/*   console.log(profileData.displayName)
+ */ 
+await db.User
+    .create({
+      firstName: profileData.displayName,
+  /*     lastName: profileData["_json"].name,
+      email: profileData["_json"].email */
+      // email: req.body.email
+    })
+    .then((newuser) => {
+      console.log('in dot then')
+      res.json(newuser);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+
+}
+
+  
 passport.serializeUser(function (user, cb) {
   cb(null, user);
 });
