@@ -62,14 +62,15 @@ passport.use(
 );
 
  const gitHub = async (profileData) => {
+   console.log(profileData);
   console.log('----------------------------------------')
 /*   console.log(profileData.displayName)
  */ 
 await db.User
     .create({
       firstName: profileData.displayName,
-  /*     lastName: profileData["_json"].name,
-      email: profileData["_json"].email */
+      /* lastName: profileData["_json"].name, */
+      lastName: profileData['_json']['login']
       // email: req.body.email
     })
     .then((newuser) => {
