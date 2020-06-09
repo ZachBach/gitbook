@@ -3,11 +3,20 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const db = require('../models');
 
-router.get('/users', (req, res) => {
-  db.User.find({
-    username: { $regex: new RegExp(req.query.q, 'i') },
+// model.findAll({
+//   where: {
+//     someAttribute: {
+//       [sequelize.Op.not]: 'some value',
+//     },
+//   },
+// });
+
+router.get('/api/wallpost', (req, res) => {
+  db.WallPost.findAll({  
+  
   }).then(() => console.log(req.params.q));
 });
+
 
 // router.post('/',
 //   async (req, res) => {
@@ -69,9 +78,21 @@ router.get('/users', (req, res) => {
 //   console.log(req.body);
 // });
 
-router.post('/api/signup', async (req, res) => {
+router.post('/api/wallpost', async (req, res) => {
   console.log(req.body)
-  console.log('in the post')
+  console.log('-----------in the wallpost----------')
+  await db.WallPost.create({
+    wallPostId: req.body.wallPostId,
+    wallPostContent: req.body.wallPostContent
+  }).then((newpost) => {
+    console.log('in the dot then of wall post route')
+    res.json(newpost);
+  }).catch((err) => {
+    res.status(404).json(err);
+  })
+})
+
+router.post('/api/signup', async (req, res) => {  
   await db.User
     .create({
       firstName: req.body.firstName,

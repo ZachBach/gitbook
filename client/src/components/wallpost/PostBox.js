@@ -1,6 +1,21 @@
 import React from 'react';
 
 const PostBox = () => {
+
+    fetch('/api/wallpost', {
+        method: 'GET',
+        headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json',
+        },
+    })
+        .then((result) => {
+        console.log(result);
+        })
+        .then((data) => {
+        console.log(data);
+        });
+
     return (
         <div>
             <div class='form-group'>
