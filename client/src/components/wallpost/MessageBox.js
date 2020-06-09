@@ -6,7 +6,7 @@ const MessageBox = () => {
     return (
         <div>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">githubHanle</label>
+                <label for="exampleFormControlTextarea1"></label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">
                 </textarea>
             </div>
