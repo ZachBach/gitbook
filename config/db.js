@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 
 const connection = mysql.createPool({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'NewPassword',
-  database : 'users_db'
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'users_db'
 });
 
 

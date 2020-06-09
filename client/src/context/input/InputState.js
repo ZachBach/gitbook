@@ -5,17 +5,19 @@ import InputReducer from './inputReducer';
 import {
   SIGN_UP,
   // SIGN_IN,
-  SET_LOADING
+  SET_LOADING,
 } from '../types';
 
 const InputState = (props) => {
   const initialState = {
-    userdata: [{
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    }],
+    userdata: [
+      {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      },
+    ],
     loading: false,
   };
 
@@ -39,9 +41,8 @@ const InputState = (props) => {
       value={{
         userdata: state.userdata,
         loading: state.loading,
-        signUp
-      }}
-    >
+        signUp,
+      }}>
       {props.children}
     </InputContext.Provider>
   );

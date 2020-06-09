@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
 
 function SignIn({ icon }) {
-
   return (
     <section className='container-fluid'>
       <section className='row'>
@@ -11,10 +8,9 @@ function SignIn({ icon }) {
 
         <div className='form-group'></div>
 
-        <a href="http://localhost:3001/auth/github">
+        <a href='http://localhost:3001/auth/github'>
           <button> Click me</button>
-      </a>
-
+        </a>
       </section>
     </section>
   );
