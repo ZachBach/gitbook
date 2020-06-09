@@ -12,7 +12,6 @@ const Wall = () => {
             <br />
             <Chatbox />
         </div>
-
     )
 }
 

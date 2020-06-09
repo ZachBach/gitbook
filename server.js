@@ -61,12 +61,12 @@ passport.use(
   )
 );
 
- const gitHub = async (profileData) => {
-   console.log(profileData);
+const gitHub = async (profileData) => {
+  console.log(profileData);
   console.log('----------------------------------------')
-/*   console.log(profileData.displayName)
- */ 
-await db.User
+  /*   console.log(profileData.displayName)
+   */
+  await db.User
     .create({
       user_id: profileData.id,
       name: profileData.displayName,
@@ -86,7 +86,7 @@ await db.User
 
 }
 
-  
+
 passport.serializeUser(function (user, cb) {
   cb(null, user);
 });
@@ -109,14 +109,14 @@ app.get(
   }
 );
 
-  app.use('/', apiRoutes);
+app.use('/', apiRoutes);
 
-  app.use('/api/signup', apiRoutes);
+app.use('/api/signup', apiRoutes);
 
-  // Define any API routes before this runs
-  app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, './client/build/index.html'));
-  });
+// Define any API routes before this runs
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 
 //  Send every request to the React app
 
@@ -132,4 +132,3 @@ db.sequelize.sync().then(function () {
     console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
   });
 })
-  

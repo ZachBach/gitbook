@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import InputContext from '../../context/input/inputContext';
-import axios from 'axios';
 import '../styles/SignUp.css';
 
 const SignUp = () => {
@@ -9,9 +8,6 @@ const SignUp = () => {
   const inputContext = useContext(InputContext);
 
   const [state, setState] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
 
   const onChange = (e) => {
     const value = e.target.value;
@@ -21,25 +17,6 @@ const SignUp = () => {
     });
   };
 
-
-
-  // const onSubmit = (event) => {
-  //   event.preventDefault();
-  //   // get our form data out of state
-  //   router.post('localhost:3001/signup', { firstName, lastName, email }).then((result) => {
-  //     //access the results here....
-  //     console.log(result)
-
-  //   });
-  // };
-
-  // axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
-  //     .then(res => {
-  //       console.log(res);
-  //       console.log(res.data);
-  //     })
-  // }
-
   const onsubmit = (event) => {
     event.preventDefault();
     // const { firstName, lastName, email } = state.value;
@@ -47,27 +24,30 @@ const SignUp = () => {
     var newUser = {
       firstName: state.firstName,
       lastName: state.lastName,
-      email: state.email
+      email: state.email,
     };
     fetch('/api/signup', {
       method: 'POST',
       body: JSON.stringify(newUser),
       headers: {
         'Content-type': 'application/json',
-        'Accept': 'application/json',
-      }}).then((result) => {
+        Accept: 'application/json',
+      },
+    })
+      .then((result) => {
         console.log(result);
-      }).then(data => {
-        console.log(data)
       })
+      .then((data) => {
+        console.log(data);
+      });
   };
-  
+
   return (
     <section className='container-fluid'>
       <section className='row'>
         <section className='col-12 col-sm-6 col-md-3' />
         <form onSubmit={onsubmit}>
-        <div className='form-group'>
+          <div className='form-group'>
             <label>First name</label>
             <input
               type='text'
@@ -115,7 +95,10 @@ const SignUp = () => {
               id='exampleInputPassword1'
             />
           </div>
-          <button type='submit' className='btn '> Sign up </button>
+          <button type='submit' className='btn '>
+            {' '}
+            Sign up{' '}
+          </button>
           <button className='btn '>
             <Link to='/login'> Login </Link>
           </button>
