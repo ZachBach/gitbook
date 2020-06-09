@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { fakeAuth } from '../privateroute/PrivateRoute';
 
 function SignIn({ icon }) {
+  useEffect(() => {
+    fakeAuth.authenticate();
+  }, []);
+
+  const handleClick = () => {
+    fakeAuth.authenticate();
+  };
   return (
     <section className='container-fluid'>
       <section className='row'>
