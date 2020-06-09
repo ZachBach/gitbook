@@ -23,6 +23,7 @@ const MessageBox = () => {
                     onChange={onChange}
                     class='form-control'
                     id='exampleFormControlTextarea1'
+                    name="msgcontent"
                     rows='3'></textarea>
             </div>
         </div>
