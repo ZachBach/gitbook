@@ -68,10 +68,13 @@ const gitHub = async (profileData) => {
    */
   await db.User
     .create({
-      firstName: profileData.displayName,
-      /* lastName: profileData["_json"].name, */
-      lastName: profileData['_json']['login']
-      // email: req.body.email
+      user_id: profileData.id,
+      name: profileData.displayName,
+      user_name: profileData['_json']['login'],
+      avatar: profileData['_json']['avatar_url'],
+      email: profileData['_json']['email'],
+      bio: profileData['_json']['bio'],
+      profile: profileData.profileUrl,
     })
     .then((newuser) => {
       console.log('in dot then')

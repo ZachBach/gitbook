@@ -14,7 +14,7 @@ const LikesState = (props) => {
     const likeClicked = async (e) => {
         dispatch({
             type: LIKED,
-            payload: res.data.items
+            payload: res.data
         })
     }
 

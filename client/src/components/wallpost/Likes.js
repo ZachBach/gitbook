@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import LikesContext from "../../context/Likes/likesContext"
+import { LIKED } from "../../context/types";
 
 
 const Likes = () => {
@@ -9,10 +10,7 @@ const Likes = () => {
     const [state, setState] = useState("");
 
     const onClickLike = (e) => {
-
-        setState({
-            ...state
-        })
+        setState({ ...state })
     };
 
     return (
