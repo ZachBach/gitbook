@@ -63,10 +63,6 @@ passport.use(
 );
 
 const gitHub = async (profileData) => {
-  console.log(profileData);
-  console.log('----------------------------------------');
-  /*   console.log(profileData.displayName)
-   */
   await db.User.create({
     user_id: profileData.id,
     name: profileData.displayName,
@@ -122,14 +118,16 @@ app.get(
   }
 );
 
+// Check if req.user has a token and use that token to see if user is authenticated on the home/wall component
+
 // app.get('/account', isAuthenticated, (req, res) => {
 //   res.render('success', { 'user' : req.user._json});
 // });
 
-app.use('/auth/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
+// app.use('/auth/logout', (req, res) => {
+//   req.logout();
+//   res.redirect('/');
+// });
 
 app.use('/', apiRoutes);
 
