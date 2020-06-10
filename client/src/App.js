@@ -9,7 +9,7 @@ import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
 import Wall from './components/pages/Wall';
-
+import PrivateRoute from './components/privateroute/PrivateRoute';
 import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
 

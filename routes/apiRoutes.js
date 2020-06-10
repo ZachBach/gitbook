@@ -3,10 +3,19 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const db = require('../models');
 
-router.get('/users', (req, res) => {
-  db.User.find({
-    username: { $regex: new RegExp(req.query.q, 'i') },
-  }).then(() => console.log(req.params.q));
+// model.findAll({
+//   where: {
+//     someAttribute: {
+//       [sequelize.Op.not]: 'some value',
+//     },
+//   },
+// });
+
+router.get('/api/wallpost', (req, res) => {
+  db.WallPost.findAll({}).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
 });
 
 // router.post('/',
@@ -69,23 +78,51 @@ router.get('/users', (req, res) => {
 //   console.log(req.body);
 // });
 
-router.post('/api/signup', async (req, res) => {
-  console.log(req.body)
-  console.log('in the post')
-  await db.User
-    .create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      // email: req.body.email
-    })
-    .then((newuser) => {
-      console.log('in dot then')
-      res.json(newuser);
+router.post('/api/currentuser', async (req, res) => {
+  console.log(req.body);
+  console.log('-----------CURRENT USER----------');
+  await db.WallPost.create({
+    CurrentUserId: req.body.wallPostId,
+    wallPostContent: req.body.wallPostContent,
+  })
+    .then((newpost) => {
+      console.log('in the dot then of wall post route');
+      res.json(newpost);
     })
     .catch((err) => {
       res.status(404).json(err);
     });
 });
 
+router.post('/api/wallpost', async (req, res) => {
+  // console.log(req.body);
+  // console.log('-----------in the wallpost----------');
+  await db.WallPost.create({
+    wallPostId: req.body.wallPostId,
+    wallPostContent: req.body.wallPostContent,
+  })
+    .then((newpost) => {
+      console.log('in the dot then of wall post route');
+      res.json(newpost);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
+
+router.post('/api/signup', async (req, res) => {
+  await db.User.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    // email: req.body.email
+  })
+    .then((newuser) => {
+      console.log('in dot then');
+      res.json(newuser);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
 
 module.exports = router;
