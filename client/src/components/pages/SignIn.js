@@ -2,10 +2,6 @@ import React, { useEffect } from 'react';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 
 function SignIn({ icon }) {
-  useEffect(() => {
-    fakeAuth.authenticate();
-  }, []);
-
   const handleClick = () => {
     fakeAuth.authenticate();
   };
