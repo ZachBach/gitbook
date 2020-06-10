@@ -55,7 +55,7 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, cb) {
       gitHub(profile);
-      console.log('CONSOLE.LOGGED ACCESS TOKEN' + accessToken);
+      createCurrentUser(profile, accessToken)
       /*       console.log(accessToken, refreshToken, profile);
        */ return cb(null, profile);
     }
@@ -74,6 +74,21 @@ const gitHub = async (profileData) => {
   })
     .then((newuser) => {
       console.log('in dot then');
+      res.json(newuser);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+};
+const createCurrentUser = async (profileData, accessToken) => {
+
+  console.log("TOOOOKENNNNNNNNN " + accessToken)
+  await db.CurrentUser.create({
+    CurrentUserId: profileData.id,
+    CurrentUserToken: accessToken,
+    CurrentUserGitHubHandle: profileData.username
+  })
+    .then((newuser) => {
       res.json(newuser);
     })
     .catch((err) => {

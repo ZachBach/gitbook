@@ -78,9 +78,25 @@ router.get('/api/wallpost', (req, res) => {
 //   console.log(req.body);
 // });
 
-router.post('/api/wallpost', async (req, res) => {
+router.post('/api/currentuser', async (req, res) => {
   console.log(req.body);
-  console.log('-----------in the wallpost----------');
+  console.log('-----------CURRENT USER----------');
+  await db.WallPost.create({
+    CurrentUserId: req.body.wallPostId,
+    wallPostContent: req.body.wallPostContent,
+  })
+    .then((newpost) => {
+      console.log('in the dot then of wall post route');
+      res.json(newpost);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
+
+router.post('/api/wallpost', async (req, res) => {
+  // console.log(req.body);
+  // console.log('-----------in the wallpost----------');
   await db.WallPost.create({
     wallPostId: req.body.wallPostId,
     wallPostContent: req.body.wallPostContent,

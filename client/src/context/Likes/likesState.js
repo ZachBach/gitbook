@@ -17,7 +17,6 @@ const LikesState = (props) => {
             payload: res.data
         })
     }
-
     return (
         <LikesContext.Provider value={[{ likesCount: state.likesCount, likeClicked }]}>
             {props.children}

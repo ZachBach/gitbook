@@ -16,45 +16,45 @@ const MessageBox = () => {
     };
 
     const onsubmit = (event) => {
-    //   event.preventDefault();
-      // get form data out of state
-      var newPost = {
-        wallPostId: Math.random(),
-        wallPostContent: state.msgcontent,
-      };
-      fetch('/api/wallpost', {
-        method: 'POST',
-        body: JSON.stringify(newPost),
-        headers: {
-          'Content-type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
-        .then((result) => {
-          console.log(result);
+        //   event.preventDefault();
+        // get form data out of state
+        var newPost = {
+            wallPostId: Math.random(),
+            wallPostContent: state.msgcontent,
+        };
+        fetch('/api/wallpost', {
+            method: 'POST',
+            body: JSON.stringify(newPost),
+            headers: {
+                'Content-type': 'application/json',
+                Accept: 'application/json',
+            },
         })
-        .then((data) => {
-          console.log(data);
-        });
+            .then((result) => {
+                console.log(result);
+            })
+            .then((data) => {
+                console.log(data);
+            });
     };
 
     return (
-      <div>
-        <div class='form-group'>
-          <label for='exampleFormControlTextarea1'>githubHandle</label>
-          <textarea
-            value={state.msgcontent}
-            name='msgcontent'
-            onChange={onChange}
-            class='form-control'
-            id='exampleFormControlTextarea1'
-            rows='3'
-          ></textarea>
-          <button type='button' onClick={onsubmit} class='btn btn-primary'>
-            Submit
+        <div>
+            <div class='form-group'>
+                <label for='exampleFormControlTextarea1'>githubHandle</label>
+                <textarea
+                    value={state.msgcontent}
+                    name='msgcontent'
+                    onChange={onChange}
+                    class='form-control'
+                    id='exampleFormControlTextarea1'
+                    rows='3'
+                ></textarea>
+                <button type='button' onClick={onsubmit} class='btn btn-primary'>
+                    Submit
           </button>
+            </div>
         </div>
-      </div>
     );
 };
 
