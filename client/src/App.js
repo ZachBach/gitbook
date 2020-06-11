@@ -9,6 +9,7 @@ import NotFound from './components/pages/NotFound';
 import SignUp from './components/pages/SignUp';
 import SignIn from './components/pages/SignIn';
 import Wall from './components/pages/Wall';
+import ChatApp from './components/pages/ChatApp';
 import PrivateRoute from './components/privateroute/PrivateRoute';
 import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
@@ -25,6 +26,7 @@ const App = () => {
             <div className='container'>
               <Alert />
               <Switch>
+                <Route exact path='/chat' component={ChatApp} />
                 <Route exact path='/' component={SignUp} />
                 <Route exact path='/home' component={Wall} />
                 <Route exact path='/login' component={SignIn} />
