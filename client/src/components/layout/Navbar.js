@@ -24,6 +24,9 @@ const Navbar = ({ icon, title }) => {
         <li>
           <Link to='/about'>About</Link>
         </li>
+        <li>
+          <Link to='/chat'>Chat</Link>
+        </li>
       </ul>
     </nav>
   );

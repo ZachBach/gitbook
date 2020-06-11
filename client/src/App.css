@@ -425,6 +425,7 @@ table th {
 }
 
 .App-header {
+  padding-top: 6rem;
   background-color: #262626;
   overflow: visible;
   width: 100%;

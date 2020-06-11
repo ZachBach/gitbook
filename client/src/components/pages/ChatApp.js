@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import Messages from "./Messages";
-import Input from "./Input";
+import '../../App.css';
+import Messages from "../../Messages";
+import Input from "../../Input";
 
 function randomName() {
   const adjectives = [
@@ -35,7 +35,7 @@ function randomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
 }
 
-class App extends Component {
+class ChatApp extends Component {
   state = {
     messages: [],
     member: {
@@ -69,7 +69,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <h1>My Chat App</h1>
+          <h1>Git.Chat</h1>
         </div>
         <Messages id = "chatMessages"
           messages={this.state.messages}
@@ -91,4 +91,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default ChatApp;
