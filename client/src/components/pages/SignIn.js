@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { fakeAuth } from '../privateroute/PrivateRoute';
+import '../styles/SignUp.css';
+import Particles from 'react-particles-js';
 
 function SignIn({ icon }) {
   const handleClick = async (e) => {
@@ -20,17 +22,26 @@ function SignIn({ icon }) {
     fakeAuth.authenticate(getCurrentUser);
   };
   return (
-    <section className='container-fluid'>
-      <section className='row'>
-        <section className='col-12 col-sm-6 col-md-3' />
+    <div>
+    <div id="particles-js"></div>
 
-        <div className='form-group'></div>
+      <div className='container-fluid'>
+        <div id='loginSection' className='row'
+        >
+          <section
+          // className='col-12 col-sm-6 col-md-3'
+          />
+          <div className='form-group'></div>
 
-        <a href='http://localhost:3001/auth/github'>
-          <button onClick={handleClick}> Click me</button>
-        </a>
-      </section>
-    </section>
+          <a href='http://localhost:3001/auth/github'>
+            <button className={icon} onClick={handleClick}>
+              {' '}
+              Sign In with Github
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 SignIn.defaultProps = {
