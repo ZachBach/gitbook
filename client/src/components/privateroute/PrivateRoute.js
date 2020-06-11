@@ -6,16 +6,21 @@ import {
   Redirect,
 } from 'react-router-dom';
 
+
+
 export const fakeAuth = {
   isAuthenticated: false,
+
   authenticate(cb) {
-    this.isAuthenticated = true;
-    setTimeout(cb, 100);
+    console.log("this is CBBBBBBBB " + cb.length)
+    if (cb.length > 0) {
+      this.isAuthenticated = true;
+    }
   },
-  signout(cb) {
+
+  signout() {
     this.isAuthenticated = false;
-    setTimeout(cb, 100);
-  },
+  }
 };
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -25,8 +30,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       fakeAuth.isAuthenticated === true ? (
         <Component {...props} />
       ) : (
-        <Redirect to='/login' />
-      )
+          <Redirect to='/login' />
+        )
     }
   />
 );

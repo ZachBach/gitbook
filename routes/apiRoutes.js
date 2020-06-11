@@ -94,6 +94,13 @@ router.post('/api/currentuser', async (req, res) => {
     });
 });
 
+router.get('/api/currentuser', (req, res) => {
+  db.CurrentUser.findAll({}).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
 router.post('/api/wallpost', async (req, res) => {
   // console.log(req.body);
   // console.log('-----------in the wallpost----------');
