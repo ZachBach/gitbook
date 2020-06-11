@@ -421,11 +421,11 @@ table th {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .App-header {
-  padding-top: 6rem;
+  /* padding-top: 6rem; */
   background-color: #262626;
   overflow: visible;
   width: 100%;
