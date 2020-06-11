@@ -12,27 +12,30 @@ export const fakeAuth = {
   isAuthenticated: false,
 
   authenticate(cb) {
-    console.log("this is CBBBBBBBB " + cb.length)
-    if (cb.length > 0) {
+    console.log("this is CBBBBBBBB " + cb)
+    if (cb === undefined || cb === null) {
+      console.log("null/Undef")
+    } else {
       this.isAuthenticated = true;
     }
   },
 
   signout() {
     this.isAuthenticated = false;
+    //also need to clear CurrentUser
   }
 };
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={(props) =>
-      fakeAuth.isAuthenticated === true ? (
+    render={(props) => (
+      fakeAuth.isAuthenticated === true ?
         <Component {...props} />
-      ) : (
-          <Redirect to='/login' />
-        )
-    }
+        :
+        <Redirect to='/login' />
+
+    )}
   />
 );
 
