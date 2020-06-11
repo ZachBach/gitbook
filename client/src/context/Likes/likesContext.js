@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-const LikesContext = createContext();
+const likesContext = createContext(5);
 
 
-export default LikesContext;
+export default likesContext;

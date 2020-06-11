@@ -7,7 +7,7 @@ export default (state, action) => {
         case LIKED:
             return {
                 ...state,
-                likesCount: state.likesCount + 1
+                likesCount: action.likesCount + 1
             };
         default:
             return state;

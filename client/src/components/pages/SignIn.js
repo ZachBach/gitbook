@@ -2,8 +2,22 @@ import React, { useEffect } from 'react';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 
 function SignIn({ icon }) {
-  const handleClick = () => {
-    fakeAuth.authenticate();
+  const handleClick = async (e) => {
+    e.preventDefault()
+    const getCurrentUser = await fetch('/api/currentuser', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((data) => data.json())
+      .then((result) => {
+        console.log(result[0].CurrentUserToken + "***********")
+        return result[0].CurrentUserToken
+      });
+
+    fakeAuth.authenticate(getCurrentUser);
   };
   return (
     <section className='container-fluid'>
@@ -13,7 +27,7 @@ function SignIn({ icon }) {
         <div className='form-group'></div>
 
         <a href='http://localhost:3001/auth/github'>
-          <button> Click me</button>
+          <button onClick={handleClick}> Click me</button>
         </a>
       </section>
     </section>
