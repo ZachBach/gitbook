@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import '../styles/SignUp.css';
-import Particles from 'react-particles-js';
+import Particles from '../layout/Particles';
 
 function SignIn({ icon }) {
   const handleClick = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const getCurrentUser = await fetch('/api/currentuser', {
       method: 'GET',
       headers: {
@@ -15,19 +15,18 @@ function SignIn({ icon }) {
     })
       .then((data) => data.json())
       .then((result) => {
-        console.log(result[0].CurrentUserToken + "***********")
-        return result[0].CurrentUserToken
+        console.log(result[0].CurrentUserToken + '***********');
+        return result[0].CurrentUserToken;
       });
 
     fakeAuth.authenticate(getCurrentUser);
   };
   return (
     <div>
-    <div id="particles-js"></div>
+      <Particles></Particles>
 
       <div className='container-fluid'>
-        <div id='loginSection' className='row'
-        >
+        <div id='loginSection' className='row'>
           <section
           // className='col-12 col-sm-6 col-md-3'
           />
