@@ -25,8 +25,8 @@ function SignIn({ icon }) {
     <div>
       <Particles></Particles>
 
-      <div className='container-fluid'>
-        <div id='loginSection' className='row'>
+      <section className='container-fluid'>
+        <section id='loginSection' className='row'>
           <section
           // className='col-12 col-sm-6 col-md-3'
           />
@@ -38,8 +38,8 @@ function SignIn({ icon }) {
               Sign In with Github
             </button>
           </a>
-        </div>
-      </div>
+        </section>
+      </section>
     </div>
   );
 }
