@@ -333,6 +333,7 @@ textarea {
 
 input[type='submit'],
 button {
+  text-align: center;
   font: inherit;
 }
 
