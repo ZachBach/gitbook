@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 // //connect to the database
 // connection();
 
-app.get('/', (req, res) => res.send('API running'));
+// app.get('/', (req, res) => res.send('API running'));
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
