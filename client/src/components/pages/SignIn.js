@@ -5,7 +5,6 @@ import Particles from '../layout/Particles';
 
 function SignIn({ icon }) {
   const handleClick = async (e) => {
-    e.preventDefault();
     const getCurrentUser = await fetch('/api/currentuser', {
       method: 'GET',
       headers: {
@@ -25,9 +24,9 @@ function SignIn({ icon }) {
     <div>
       <Particles></Particles>
 
-      <section className='container-fluid'>
-        <section id='loginSection' className='row'>
-          <section
+      <div className='container-fluid'>
+        <div id='loginSection' className='row'>
+          <div
           // className='col-12 col-sm-6 col-md-3'
           />
           <div className='form-group'></div>
@@ -38,8 +37,8 @@ function SignIn({ icon }) {
               Sign In with Github
             </button>
           </a>
-        </section>
-      </section>
+        </div>
+      </div>
     </div>
   );
 }
