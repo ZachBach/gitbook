@@ -15,9 +15,9 @@ const PostBox = () => {
 
   return (
     <div>
-      <div class='form-group'>
-        <label for='exampleFormControlTextarea1'>githubHandle</label>
-        <div class='form-control' id='exampleFormControlTextarea1' rows='3'>
+      <div className='form-group'>
+        <label>githubHandle</label>
+        <div className='form-control' id='exampleFormControlTextarea1' rows='3'>
           Message
         </div>
       </div>
