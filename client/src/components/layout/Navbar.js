@@ -13,19 +13,16 @@ const Navbar = ({ icon, title }) => {
           <Link to='/home'>Home</Link>
         </li>
         <li>
-          <Link to='/login'>Login </Link>
-        </li>
-        <li>
-          <Link to='/'>Sign up</Link>
+          <Link to='/'>Login </Link>
         </li>
         <li>
           <Link to='/search'>Search</Link>
         </li>
         <li>
-          <Link to='/about'>About</Link>
+          <Link to='/chat'>Chat</Link>
         </li>
         <li>
-          <Link to='/chat'>Chat</Link>
+          <Link to='/about'>About</Link>
         </li>
       </ul>
     </nav>
