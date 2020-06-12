@@ -1,6 +1,3 @@
-import { createContext } from 'react';
+import React, { createContext } from 'react';
 
-const likesContext = createContext(5);
-
-
-export default likesContext;
+export const LikesContext = createContext();

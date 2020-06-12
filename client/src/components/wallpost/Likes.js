@@ -1,37 +1,25 @@
-import React, { useContext, useState } from "react"
-import LikesContext from "../../context/Likes/likesContext"
+import React, { useContext } from 'react';
+import { LikesContext } from '../../context/Likes/likesContext';
+import LikesState from '../../context/Likes/likesState';
 
+import Test from './test';
 
 const Likes = () => {
-
-    const [wallposting, setWallPosting] = useState([]);
-    const likesContext = useContext(LikesContext)
-    const [state, setState] = useState([])
-
-    const onClickLike = (e) => {
-        let clickedValue = e.target.value
-
-        setState({
-            ...state,
-            [e.target.name]: clickedValue
-        })
-    }
-
-    console.log(likesContext + "-----")
-
-
-    return (
-        <div className="col-4">
-            <button type="button"
-                class="btn btn-primary"
-                value={state.likesCount}
-                name="likesCount"
-                onClick={onClickLike}>
-                Like
-            </button>
-        </div>
-    )
-}
+  return (
+    <LikesState>
+      <div className='col-4'>
+        <Test />
+        <button
+          type='button'
+          className='btn btn-primary'
+          //   value={state.likesCount}
+          name='likesCount'
+          onClick={() => {}}>
+          Like
+        </button>
+      </div>
+    </LikesState>
+  );
+};
 
 export default Likes;
-
