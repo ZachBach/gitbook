@@ -13,9 +13,6 @@ const Navbar = ({ icon, title }) => {
           <Link to='/home'>Home</Link>
         </li>
         <li>
-          <Link to='/'>Login </Link>
-        </li>
-        <li>
           <Link to='/search'>Search</Link>
         </li>
         <li>
@@ -24,13 +21,16 @@ const Navbar = ({ icon, title }) => {
         <li>
           <Link to='/about'>About</Link>
         </li>
+        <li>
+          <Link to='/admin'>Admin</Link>
+        </li>
       </ul>
     </nav>
   );
 };
 
 Navbar.defaultProps = {
-  title: 'GitBook',
+  title: 'Git Comm.it',
   icon: 'fab fa-github',
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { fakeAuth } from '../privateroute/PrivateRoute';
+import { fakeAuth, handleClick } from '../privateroute/PrivateRoute';
 import '../styles/SignUp.css';
 import Particles from '../layout/Particles';
 
@@ -20,17 +20,16 @@ function SignIn({ icon }) {
 
     fakeAuth.authenticate(getCurrentUser);
   };
+
   return (
     <div>
       <Particles></Particles>
-
       <div className='container-fluid'>
         <div id='loginSection' className='row'>
           <div
           // className='col-12 col-sm-6 col-md-3'
           />
           <div className='form-group'></div>
-
           <a href='http://localhost:3001/auth/github'>
             <button className={icon} onClick={handleClick}>
               {' '}
