@@ -31,10 +31,10 @@ const MessageBox = () => {
       },
     })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
       });
   };
 

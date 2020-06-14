@@ -2,13 +2,13 @@ import React, { useContext } from 'react';
 import { LikesContext } from '../../context/Likes/likesContext';
 import LikesState from '../../context/Likes/likesState';
 
-import Test from './test';
+// import Test from './test';
 
 const Likes = () => {
   return (
     <LikesState>
       <div className='col-4'>
-        <Test />
+        {/* <Test /> */}
         <button
           type='button'
           className='btn btn-primary'
