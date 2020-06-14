@@ -29,8 +29,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
         fakeAuth.isAuthenticated === true ? (
           console.log('hi')
         ) : (
-          <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-        )
+            <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+          )
       }
     />
   );

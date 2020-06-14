@@ -62,7 +62,7 @@ passport.use(
   )
 );
 
-const gitHub = async (profileData) => {
+const gitHub = async (profileData, res) => {
   await db.User.create({
     user_id: profileData.id,
     name: profileData.displayName,
@@ -80,13 +80,10 @@ const gitHub = async (profileData) => {
       res.status(404).json(err);
     });
 };
-const createCurrentUser = async (profileData, accessToken) => {
-<<<<<<< HEAD
+const createCurrentUser = async (profileData, accessToken, res) => {
 
   // console.log("TOOOOKENNNNNNNNN " + accessToken)
-=======
   console.log('TOOOOKENNNNNNNNN ' + accessToken);
->>>>>>> d0f180f5ad290fbd8b56b9aeda2b07f9f7601fc2
   await db.CurrentUser.create({
     CurrentUserId: profileData.id,
     CurrentUserToken: accessToken,
@@ -117,6 +114,7 @@ app.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
+    console.log("authenticated")
     // Successful authentication, redirect home.
     res.redirect('http://127.0.0.1:3000/home');
   }

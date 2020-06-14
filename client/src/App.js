@@ -20,6 +20,7 @@ import AlertState from './context/alert/AlertState';
 // import Login, { fakeAuth } from './components/privateroute/Login';
 
 import './App.css';
+import CurrentUserState from './context/currentUser/currentUserState';
 
 // const PrivateRoute = ({ component: Component, ...rest }) => {
 //   return (
@@ -42,26 +43,28 @@ const App = () => {
   return (
     <GithubState>
       <AlertState>
-        <Router>
-          <div className='App'>
-            <Navbar />
-            <div className='container'>
-              <Alert />
-              <Switch>
-                {/* <Route path='/login' component={Login} />
+        <CurrentUserState>
+          <Router>
+            <div className='App'>
+              <Navbar />
+              <div className='container'>
+                <Alert />
+                <Switch>
+                  {/* <Route path='/login' component={Login} />
                 <Route exact path='/' component={Home} />
                 <PrivateRoute path='/admin' component={Admin} /> */}
-                <Route exact path='/chat' component={ChatApp} />
-                <PrivateRoute exact path='/home' component={Wall} />
-                <Route exact path='/search' component={Home} />
-                <Route exact path='/about' component={About} />
-                <Route exact path='/user/:login' component={User} />
-                <Route exact path='/' component={SignIn} />
-                <Route component={NotFound} />
-              </Switch>
+                  <Route exact path='/chat' component={ChatApp} />
+                  <Route exact path='/home' component={Wall} />
+                  <Route exact path='/search' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/user/:login' component={User} />
+                  <Route exact path='/' component={SignIn} />
+                  <Route component={NotFound} />
+                </Switch>
+              </div>
             </div>
-          </div>
-        </Router>
+          </Router>
+        </CurrentUserState>
       </AlertState>
     </GithubState>
   );

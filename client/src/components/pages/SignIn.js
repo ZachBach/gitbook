@@ -1,24 +1,29 @@
-import React, { useEffect } from 'react';
-import { fakeAuth, handleClick } from '../privateroute/PrivateRoute';
+import React, { useEffect, useContext } from 'react';
+import { fakeAuth } from '../privateroute/PrivateRoute';
 import '../styles/SignUp.css';
 import Particles from '../layout/Particles';
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
+
 
 function SignIn({ icon }) {
-  const handleClick = async (e) => {
-    const getCurrentUser = await fetch('/api/currentuser', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
-      .then((data) => data.json())
-      .then((result) => {
-        // console.log(result[0].CurrentUserToken + '***********');
-        return result[0].CurrentUserToken;
-      });
+  const currentUserContext = useContext(CurrentUserContext);
 
-    fakeAuth.authenticate(getCurrentUser);
+  const handleClick = async (e) => {
+    // const getCurrentUser = await fetch('/api/currentuser', {
+    //   method: 'GET',
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //     Accept: 'application/json',
+    //   },
+    // })
+    //   .then((data) => data.json())
+    //   .then((result) => {
+    //     return result[0].CurrentUserToken;
+    //   });
+    await currentUserContext.updateCurrentUser()
+    console.log("this is from SIGNINNNNN")
+    console.log(currentUserContext)
+    fakeAuth.authenticate(currentUserContext.CurrentUserToken);
   };
 
   return (
