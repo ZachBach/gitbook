@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 // //connect to the database
 // connection();
 
-app.get('/', (req, res) => res.send('API running'));
+// app.get('/', (req, res) => res.send('API running'));
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -55,14 +55,14 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, cb) {
       gitHub(profile);
-      createCurrentUser(profile, accessToken)
+      createCurrentUser(profile, accessToken);
       /*       console.log(accessToken, refreshToken, profile);
        */ return cb(null, profile);
     }
   )
 );
 
-const gitHub = async (profileData) => {
+const gitHub = async (profileData, res) => {
   await db.User.create({
     user_id: profileData.id,
     name: profileData.displayName,
@@ -80,12 +80,14 @@ const gitHub = async (profileData) => {
       res.status(404).json(err);
     });
 };
-const createCurrentUser = async (profileData, accessToken) => {
+const createCurrentUser = async (profileData, accessToken, res) => {
 
+  // console.log("TOOOOKENNNNNNNNN " + accessToken)
+  console.log('TOOOOKENNNNNNNNN ' + accessToken);
   await db.CurrentUser.create({
     CurrentUserId: profileData.id,
     CurrentUserToken: accessToken,
-    CurrentUserGitHubHandle: profileData.username
+    CurrentUserGitHubHandle: profileData.username,
   })
     .then((newuser) => {
       res.json(newuser);

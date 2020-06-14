@@ -22,21 +22,19 @@ function SignIn({ icon }) {
     //   });
     await currentUserContext.updateCurrentUser()
     console.log("this is from SIGNINNNNN")
-    await console.log(currentUserContext)
+    console.log(currentUserContext)
     fakeAuth.authenticate(currentUserContext.CurrentUserToken);
   };
 
   return (
     <div>
       <Particles></Particles>
-
       <div className='container-fluid'>
         <div id='loginSection' className='row'>
           <div
           // className='col-12 col-sm-6 col-md-3'
           />
           <div className='form-group'></div>
-
           <a href='http://localhost:3001/auth/github'>
             <button className={icon} onClick={handleClick}>
               {' '}
