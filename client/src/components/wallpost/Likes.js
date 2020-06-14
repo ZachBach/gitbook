@@ -8,7 +8,7 @@ const Likes = () => {
   return (
     <LikesState>
       <div className='col-4'>
-        <Test />
+        {/* <Test /> */}
         <button
           type='button'
           className='btn btn-primary'

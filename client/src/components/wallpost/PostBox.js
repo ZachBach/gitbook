@@ -10,7 +10,7 @@ const PostBox = () => {
   })
     .then((data) => data.json())
     .then((result) => {
-      console.log(result);
+      // console.log(result);
     });
 
   return (

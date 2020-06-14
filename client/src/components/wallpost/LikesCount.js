@@ -5,8 +5,8 @@ const LikesCount = () => {
   console.log(LikesContext);
   const likesContext2 = useContext(LikesContext);
 
-  console.log(likesContext2);
-  console.log('hello');
+  // console.log(likesContext2);
+  // console.log('hello');
   return <h1>Hello </h1>;
 };
 

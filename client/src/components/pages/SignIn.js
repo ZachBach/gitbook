@@ -14,7 +14,7 @@ function SignIn({ icon }) {
     })
       .then((data) => data.json())
       .then((result) => {
-        console.log(result[0].CurrentUserToken + '***********');
+        // console.log(result[0].CurrentUserToken + '***********');
         return result[0].CurrentUserToken;
       });
 
