@@ -78,6 +78,8 @@ router.get('/api/wallpost', (req, res) => {
 //   console.log(req.body);
 // });
 
+
+
 router.post('/api/currentuser', async (req, res) => {
   console.log(req.body);
   console.log('-----------CURRENT USER----------');
@@ -102,11 +104,11 @@ router.get('/api/currentuser', (req, res) => {
 });
 
 router.post('/api/wallpost', async (req, res) => {
-  // console.log(req.body);
-  // console.log('-----------in the wallpost----------');
   await db.WallPost.create({
     wallPostId: req.body.wallPostId,
     wallPostContent: req.body.wallPostContent,
+    userid: req.body.userid,
+    parentpostid: req.body.parentpostid
   })
     .then((newpost) => {
       console.log('in the dot then of wall post route');

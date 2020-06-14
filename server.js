@@ -82,7 +82,6 @@ const gitHub = async (profileData) => {
 };
 const createCurrentUser = async (profileData, accessToken) => {
 
-  console.log("TOOOOKENNNNNNNNN " + accessToken)
   await db.CurrentUser.create({
     CurrentUserId: profileData.id,
     CurrentUserToken: accessToken,
@@ -113,6 +112,7 @@ app.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
+    console.log("authenticated")
     // Successful authentication, redirect home.
     res.redirect('http://127.0.0.1:3000/home');
   }

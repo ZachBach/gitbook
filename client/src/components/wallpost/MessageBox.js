@@ -1,26 +1,22 @@
 import React, { useState, useContext } from 'react';
-import WallMsgContext from '../../context/WallMessages/wallMsgContext';
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
 
 const MessageBox = () => {
-  const [wallposting, setWallPosting] = useState([]);
-  const wallMsgContext = useContext(WallMsgContext);
+  const currentUserContext = useContext(CurrentUserContext);
+  const [msgTyped, setMsgTyped] = useState("");
 
-  const [state, setState] = useState('');
-
-  const onChange = (e) => {
-    const inputValue = e.target.value;
-    setState({
-      ...state,
-      [e.target.name]: inputValue,
-    });
+  const onchange = (e) => {
+    setMsgTyped(e.target.value);
+    console.log(msgTyped)
   };
 
-  const onsubmit = (event) => {
-    //   event.preventDefault();
-    // get form data out of state
+  const onsubmit = () => {
+    console.log(currentUserContext)
     var newPost = {
-      wallPostId: Math.random(),
-      wallPostContent: state.msgcontent,
+      wallPostId: Math.random() * 100000,
+      wallPostContent: msgTyped,
+      userid: currentUserContext.CurrentUserGitHubHandle,
+      parentpostid: currentUserContext.parentpostid
     };
     fetch('/api/wallpost', {
       method: 'POST',
@@ -30,22 +26,20 @@ const MessageBox = () => {
         Accept: 'application/json',
       },
     })
+      .then((data) => data.json())
       .then((result) => {
         console.log(result);
-      })
-      .then((data) => {
-        console.log(data);
       });
   };
 
   return (
     <div>
       <div className='form-group'>
-        <label>githubHandle</label>
+        <label>{currentUserContext.CurrentUserGitHubHandle}</label>
         <textarea
-          value={state.msgcontent}
+          onChange={onchange}
+          value={msgTyped}
           name='msgcontent'
-          onChange={onChange}
           className='form-control'
           id='exampleFormControlTextarea1'
           rows='3'></textarea>
@@ -53,7 +47,7 @@ const MessageBox = () => {
           Submit
         </button>
       </div>
-    </div>
+    </div >
   );
 };
 

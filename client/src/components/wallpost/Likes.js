@@ -1,24 +1,26 @@
 import React, { useContext } from 'react';
 import { LikesContext } from '../../context/Likes/likesContext';
-import LikesState from '../../context/Likes/likesState';
+import LikesState from '../../context/Likes/likesState'
 
-import Test from './test';
 
 const Likes = () => {
+
+  const likesContext2 = useContext(LikesContext);
+  console.log(likesContext2)
+
   return (
-    <LikesState>
-      <div className='col-4'>
-        <Test />
-        <button
-          type='button'
-          className='btn btn-primary'
-          //   value={state.likesCount}
-          name='likesCount'
-          onClick={() => {}}>
-          Like
+    <div className='col-4'>
+      <button
+        type='button'
+        className='btn btn-primary'
+        name='likesCount'
+        value={likesContext2}
+        onClick={likesContext2.likeClicked}
+      >
+        Like
         </button>
-      </div>
-    </LikesState>
+    </div>
+
   );
 };
 

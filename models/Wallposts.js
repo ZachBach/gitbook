@@ -8,6 +8,12 @@ module.exports = function (sequelize, DataTypes) {
     wallPostContent: {
       type: DataTypes.STRING,
     },
+    userid: {
+      type: DataTypes.STRING,
+    },
+    parentpostid: {
+      type: DataTypes.INTEGER,
+    }
   });
   return WallPost;
 };

@@ -8,3 +8,4 @@ export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const SIGN_IN = 'SIGN_IN';
 export const SIGN_UP = 'SIGN_UP';
 export const LIKED = 'LIKED';
+export const IS_AUTHENTICATED = "IS_AUTHENTICATED"

@@ -14,28 +14,31 @@ import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
 
 import './App.css';
+import CurrentUserState from './context/currentUser/currentUserState';
 
 const App = () => {
   return (
     <GithubState>
       <AlertState>
-        <Router>
-          <div className='App'>
-            <Navbar />
-            <div className='container'>
-              <Alert />
-              <Switch>
-                <Route exact path='/chat' component={ChatApp} />
-                <Route exact path='/home' component={Wall} />
-                <Route exact path='/' component={SignIn} />
-                <Route exact path='/search' component={Home} />
-                <Route exact path='/about' component={About} />
-                <Route exact path='/user/:login' component={User} />
-                <Route component={NotFound} />
-              </Switch>
+        <CurrentUserState>
+          <Router>
+            <div className='App'>
+              <Navbar />
+              <div className='container'>
+                <Alert />
+                <Switch>
+                  <Route exact path='/chat' component={ChatApp} />
+                  <Route exact path='/home' component={Wall} />
+                  <Route exact path='/' component={SignIn} />
+                  <Route exact path='/search' component={Home} />
+                  <Route exact path='/about' component={About} />
+                  <Route exact path='/user/:login' component={User} />
+                  <Route component={NotFound} />
+                </Switch>
+              </div>
             </div>
-          </div>
-        </Router>
+          </Router>
+        </CurrentUserState>
       </AlertState>
     </GithubState>
   );
