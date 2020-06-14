@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { LikesContext } from '../../context/Likes/likesContext';
 import LikesState from '../../context/Likes/likesState';
 
-// import Test from './test';
+import Test from './LikesCount';
 
 const Likes = () => {
   return (

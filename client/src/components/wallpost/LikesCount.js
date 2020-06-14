@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { LikesContext } from '../../context/Likes/likesContext';
-const Test = () => {
+
+const LikesCount = () => {
   console.log(LikesContext);
   const likesContext2 = useContext(LikesContext);
 
@@ -9,4 +10,4 @@ const Test = () => {
   return <h1>Hello </h1>;
 };
 
-export default Test;
+export default LikesCount;
