@@ -18,6 +18,7 @@ const MessageBox = () => {
       userid: currentUserContext.CurrentUserGitHubHandle,
       parentpostid: currentUserContext.parentpostid
     };
+
     fetch('/api/wallpost', {
       method: 'POST',
       body: JSON.stringify(newPost),

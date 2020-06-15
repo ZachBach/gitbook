@@ -26,7 +26,7 @@ const CurrentUserState = (props) => {
                 console.log('FROm CURRENT USER STATE')
                 console.log(result[0]);
                 return result[0];
-            });
+            })
         dispatch({
             type: IS_AUTHENTICATED,
             payload: getCurrentUser
