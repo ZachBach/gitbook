@@ -60,28 +60,18 @@ import SignIn from './SignIn';
 //   console.log(chatName);
 // }
 
-const currentGithubHandle = '';
 
-function getFetch () {
-  fetch('/api/currentuser', {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-    },
-  })
-  .then((data) => data.json())
-  .then((result) => {
-    console.log('in the dot then');
-    console.log(result[0].CurrentUserGitHubHandle);
-    currentGithubHandle = result[0].CurrentUserGitHubHandle;
-  })
-}
 
-function randomName(currentGithubHandle) {
+
+function randomName() {
   // const chatUsername = () => {
-  getFetch(currentGithubHandle) 
-  console.log(currentGithubHandle + '^^^^^^^^^^^^^^')
+  return fetch('/api/currentuser', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
     // .then((data) => data.json())
       // .then((result) => {
       //   console.log('in the dot then');
@@ -105,23 +95,23 @@ function randomColor() {
 
 
 class ChatApp extends Component {
-  // currentGitHubUser = randomName()
-  //       .then((data) => data.json())
-  //       .then((result) => {
-  //       console.log(result[0].CurrentUserGitHubHandle)
-  //       return result[0].CurrentUserGitHubHandle
-  //       })
+  currentGitHubUser = randomName()
+        .then((data) => data.json())
+        .then((result) => {
+        console.log(result[0].CurrentUserGitHubHandle)
+        return result[0].CurrentUserGitHubHandle
+      })
 
 
   state = {
     messages: [],
     member: {
-      username: randomName(),      
+      username:       
         // JSON.stringify(result[0].CurrentUserGitHubHandle)
         // const storedGitHubHandle = result[0].CurrentUserGitHubHandle
         // return storedGitHubHandle
-      // this.currentGitHubUser,  
-      // console.log(this.currentGitHubUser),
+      this.currentGitHubUser,  
+      // console.log(randomName() + '----11111-1--1-1-'),
         // .then((result) => {(console.log(result[0].CurrentUserGitHubHandle))}),
       color: randomColor(),
     },

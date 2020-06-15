@@ -115,7 +115,7 @@ app.get(
   function (req, res) {
     console.log("authenticated")
     // Successful authentication, redirect home.
-    // res.redirect('http://127.0.0.1:3000/home');
+    res.redirect('http://127.0.0.1:3000/home');
   }
 );
 
