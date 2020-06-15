@@ -3,14 +3,6 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 const db = require('../models');
 
-// model.findAll({
-//   where: {
-//     someAttribute: {
-//       [sequelize.Op.not]: 'some value',
-//     },
-//   },
-// });
-
 router.get('/api/wallpost', (req, res) => {
   db.WallPost.findAll({}).then((data) => {
     console.log(data);
@@ -80,9 +72,30 @@ router.get('/api/wallpost', (req, res) => {
 
 
 
+
+router.post('/api/likes', async (req, res) => {
+  await db.Likes.create({
+    likescount: req.body.likesCount,
+    status: req.body.status,
+    userid: req.body.userid,
+    postid: req.body.postid
+  })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
+
+router.get('/api/likes', (req, res) => {
+  db.CurrentUser.findAll({}).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
 router.post('/api/currentuser', async (req, res) => {
-  console.log(req.body);
-  console.log('-----------CURRENT USER----------');
   await db.WallPost.create({
     CurrentUserId: req.body.wallPostId,
     wallPostContent: req.body.wallPostContent,

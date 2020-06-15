@@ -17,6 +17,7 @@ import ChatApp from './components/pages/ChatApp';
 import PrivateRoute from './components/privateroute/PrivateRoute';
 import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
+import WallState from './context/wall/wallState';
 // import Login, { fakeAuth } from './components/privateroute/Login';
 
 import './App.css';
@@ -44,26 +45,28 @@ const App = () => {
     <GithubState>
       <AlertState>
         <CurrentUserState>
-          <Router>
-            <div className='App'>
-              <Navbar />
-              <div className='container'>
-                <Alert />
-                <Switch>
-                  {/* <Route path='/login' component={Login} />
+          <WallState>
+            <Router>
+              <div className='App'>
+                <Navbar />
+                <div className='container'>
+                  <Alert />
+                  <Switch>
+                    {/* <Route path='/login' component={Login} />
                 <Route exact path='/' component={Home} />
                 <PrivateRoute path='/admin' component={Admin} /> */}
-                  <Route exact path='/chat' component={ChatApp} />
-                  <Route exact path='/home' component={Wall} />
-                  <Route exact path='/search' component={Home} />
-                  <Route exact path='/about' component={About} />
-                  <Route exact path='/user/:login' component={User} />
-                  <Route exact path='/' component={SignIn} />
-                  <Route component={NotFound} />
-                </Switch>
+                    <Route exact path='/chat' component={ChatApp} />
+                    <Route exact path='/home' component={Wall} />
+                    <Route exact path='/search' component={Home} />
+                    <Route exact path='/about' component={About} />
+                    <Route exact path='/user/:login' component={User} />
+                    <Route exact path='/' component={SignIn} />
+                    <Route component={NotFound} />
+                  </Switch>
+                </div>
               </div>
-            </div>
-          </Router>
+            </Router>
+          </WallState>
         </CurrentUserState>
       </AlertState>
     </GithubState>
