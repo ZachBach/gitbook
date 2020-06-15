@@ -8,7 +8,6 @@ const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 const apiRoutes = require('./routes/apiRoutes');
 const db = require('./models');
-
 const app = express();
 app.use(bodyParser.json());
 
@@ -116,7 +115,7 @@ app.get(
   function (req, res) {
     console.log("authenticated")
     // Successful authentication, redirect home.
-    res.redirect('http://127.0.0.1:3000/home');
+    // res.redirect('http://127.0.0.1:3000/home');
   }
 );
 

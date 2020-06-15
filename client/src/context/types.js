@@ -10,3 +10,5 @@ export const SIGN_UP = 'SIGN_UP';
 export const LIKED = 'LIKED';
 export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';
 export const WALL_POSTS = 'WALL_POSTS';
+export const UNLIKED = 'UNLIKED';
+export const LOAD = 'LOAD';

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Likes from './Likes';
 import Reply from './Reply';
 import PostBox from './PostBox';
