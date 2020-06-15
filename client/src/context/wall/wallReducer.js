@@ -5,9 +5,10 @@ export default (state, action) => {
     case WALL_POSTS:
       return {
         ...state,
-        id: action.payload.id,
-        wallPostId: action.payload.wallPostId,
-        wallPostContent: action.payload.wallPostContent,
+        postArray: action.payload,
+        // id: action.payload.id,
+        // wallPostId: action.payload.wallPostId,
+        // wallPostContent: action.payload.wallPostContent,
       };
     default:
       return state;
