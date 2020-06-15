@@ -5,7 +5,8 @@ import Input from "../../Input";
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import SignIn from './SignIn';
 
-// function randomName() {
+
+
 //   const adjectives = [
 //     "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
 //     "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
@@ -31,7 +32,68 @@ import SignIn from './SignIn';
 //   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
 //   const noun = nouns[Math.floor(Math.random() * nouns.length)];
 //   return adjective + noun;
+
+
+// const chatUsername = () => {
+//   fetch('/api/currentuser', {
+//       method: 'GET',
+//       headers: {
+//         'Content-type': 'application/json',
+//         Accept: 'application/json',
+//       },
+//     })
+//       .then((data) => 
+//       data.json())      
+//     .then((result) => {
+//       console.log('in the dot then')
+//       console.log(result[0].CurrentUserGitHubHandle);
+//       currentGithubHandle = result[0].CurrentUserGitHubHandle;
+//       return currentGithubHandle;
+//     })
+//   }
+  
+// chatUsername(currentGithubHandle)
+// console.log(currentGithubHandle)
+
+// function githubHandle() {
+//   const chatName = [this.currentGithubHandle];
+//   console.log(chatName);
 // }
+
+const currentGithubHandle = '';
+
+function getFetch () {
+  fetch('/api/currentuser', {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+  .then((data) => data.json())
+  .then((result) => {
+    console.log('in the dot then');
+    console.log(result[0].CurrentUserGitHubHandle);
+    currentGithubHandle = result[0].CurrentUserGitHubHandle;
+  })
+}
+
+function randomName(currentGithubHandle) {
+  // const chatUsername = () => {
+  getFetch(currentGithubHandle) 
+  console.log(currentGithubHandle + '^^^^^^^^^^^^^^')
+    // .then((data) => data.json())
+      // .then((result) => {
+      //   console.log('in the dot then');
+      //   console.log(result[0].CurrentUserGitHubHandle);
+      //   currentGithubHandle = result[0].CurrentUserGitHubHandle;
+      //   console.log(currentGithubHandle);
+      // });
+
+      
+      // };
+  // currentGithubHandle = chatUsername();
+}
 
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
@@ -41,76 +103,75 @@ function randomColor() {
 // console.log(data) 
 // console.log(SignIn(data));
 
-const chatUsername = async () => {
-    const getCurrentUser = await fetch('/api/currentuser', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
-      .then((data) => data.json())
-      .then((result) => {
-        console.log('---------inside dot then of chatUsername function-------')
-        console.log(result[0]);
-        return result[0];
-      });
-  }
 
 class ChatApp extends Component {
+  // currentGitHubUser = randomName()
+  //       .then((data) => data.json())
+  //       .then((result) => {
+  //       console.log(result[0].CurrentUserGitHubHandle)
+  //       return result[0].CurrentUserGitHubHandle
+  //       })
+
+
   state = {
     messages: [],
     member: {
-      username: chatUsername,
+      username: randomName(),      
+        // JSON.stringify(result[0].CurrentUserGitHubHandle)
+        // const storedGitHubHandle = result[0].CurrentUserGitHubHandle
+        // return storedGitHubHandle
+      // this.currentGitHubUser,  
+      // console.log(this.currentGitHubUser),
+        // .then((result) => {(console.log(result[0].CurrentUserGitHubHandle))}),
       color: randomColor(),
-    }
-  }
+    },
+  };
+
 
   constructor() {
     super();
-    this.drone = new window.Scaledrone("v0EiAhIDZNsEFNfj", {
-      data: this.state.member
+    this.drone = new window.Scaledrone('v0EiAhIDZNsEFNfj', {
+      data: this.state.member,
     });
-    this.drone.on('open', error => {
+    this.drone.on('open', (error) => {
       if (error) {
         return console.error(error);
       }
-      const member = {...this.state.member};
+      const member = { ...this.state.member };
       member.id = this.drone.clientId;
-      this.setState({member});
+      this.setState({ member });
+      console.log(JSON.stringify(member) + '------------------');
     });
-    const room = this.drone.subscribe("observable-room");
+    const room = this.drone.subscribe('observable-room');
     room.on('data', (data, member) => {
       const messages = this.state.messages;
-      messages.push({member, text: data});
-      this.setState({messages});
+      messages.push({ member, text: data });
+      this.setState({ messages });
     });
   }
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
+      <div className='App'>
+        <div className='App-header'>
           <h1>Git.Chat</h1>
         </div>
-        <Messages id = "chatMessages"
+        <Messages
+          id='chatMessages'
           messages={this.state.messages}
           currentMember={this.state.member}
         />
-        <Input id = "chatInput"
-          onSendMessage={this.onSendMessage}
-        />
+        <Input id='chatInput' onSendMessage={this.onSendMessage} />
       </div>
     );
   }
 
   onSendMessage = (message) => {
     this.drone.publish({
-      room: "observable-room",
-      message
+      room: 'observable-room',
+      message,
     });
-  }
-
+  };
 }
 
 export default ChatApp;
