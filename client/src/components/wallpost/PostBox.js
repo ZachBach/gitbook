@@ -6,23 +6,23 @@ const PostBox = () => {
   const currentUserContext = useContext(CurrentUserContext);
   const wallContext = useContext(WallContext);
 
-  const { id, wallPostId, wallPostContent } = wallContext;
+  const { postArray } = wallContext;
 
   useEffect(() => {
     wallContext.getAllWallPosts();
   }, []);
 
-  const posts = wallPostContent;
-  console.log(posts);
-
+  console.log(postArray);
   return (
     <div>
       <div className='form-group'>
         <label>{currentUserContext.CurrentUserGitHubHandle}</label>
-        <div className='form-control' id='exampleFormControlTextarea1' rows='3'>
-          {/* {wallContext.wallPostContent.map((post) => (
-            <p key={[post.id]}></p>
-          ))} */}
+        <div className='form-control' id='exampleFormControlTextarea1'>
+          {postArray &&
+            postArray.map((post) => {
+              console.log(post);
+              return <p key={post.id}> {post.wallPostContent} </p>;
+            })}
         </div>
       </div>
     </div>

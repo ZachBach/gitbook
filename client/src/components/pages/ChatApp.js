@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import Messages from "../../Messages";
-import Input from "../../Input";
+import Messages from '../../Messages';
+import Input from '../../Input';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import SignIn from './SignIn';
 
@@ -60,63 +60,47 @@ import SignIn from './SignIn';
 //   console.log(chatName);
 // }
 
-
-
-
-function randomName() {
-  // const chatUsername = () => {
-  return fetch('/api/currentuser', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
-    // .then((data) => data.json())
-      // .then((result) => {
-      //   console.log('in the dot then');
-      //   console.log(result[0].CurrentUserGitHubHandle);
-      //   currentGithubHandle = result[0].CurrentUserGitHubHandle;
-      //   console.log(currentGithubHandle);
-      // });
-
-      
-      // };
-  // currentGithubHandle = chatUsername();
-}
-
 function randomColor() {
-  return '#' + Math.floor(Math.random() * 0xFFFFFF).toString(16);
+  return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 
 // SignIn(data)
-// console.log(data) 
+// console.log(data)
 // console.log(SignIn(data));
 
+const chatUsername = async () => {
+  const getCurrentUser = await fetch('/api/currentuser', {
+    method: 'GET',
+    headers: {
+      'Content-type': 'application/json',
+      Accept: 'application/json',
+    },
+  })
+    .then((data) => data.json())
+    .then((result) => {
+      console.log('---------inside dot then of chatUsername function-------');
+      console.log(result[0]);
+      return result[0];
+    });
+  return getCurrentUser;
+};
 
 class ChatApp extends Component {
-  currentGitHubUser = randomName()
-        .then((data) => data.json())
-        .then((result) => {
-        console.log(result[0].CurrentUserGitHubHandle)
-        return result[0].CurrentUserGitHubHandle
-      })
-
-
+  componentDidMount() {
+    chatUsername().then((gitHubHandle) => {
+      // const gitHubHandle = chatUsername();
+      this.setState({
+        member: { username: gitHubHandle.CurrentUserGitHubHandle },
+      });
+    });
+  }
   state = {
     messages: [],
     member: {
-      username:       
-        // JSON.stringify(result[0].CurrentUserGitHubHandle)
-        // const storedGitHubHandle = result[0].CurrentUserGitHubHandle
-        // return storedGitHubHandle
-      this.currentGitHubUser,  
-      // console.log(randomName() + '----11111-1--1-1-'),
-        // .then((result) => {(console.log(result[0].CurrentUserGitHubHandle))}),
+      username: '',
       color: randomColor(),
     },
   };
-
 
   constructor() {
     super();
@@ -129,8 +113,7 @@ class ChatApp extends Component {
       }
       const member = { ...this.state.member };
       member.id = this.drone.clientId;
-      this.setState({ member });
-      console.log(JSON.stringify(member) + '------------------');
+      // this.setState({ member });
     });
     const room = this.drone.subscribe('observable-room');
     room.on('data', (data, member) => {
