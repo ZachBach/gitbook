@@ -13,8 +13,8 @@ const WallState = (props) => {
 
   const [state, dispatch] = useReducer(WallReducer, initialState);
 
-  const getAllWallPosts = () => {
-    const getWallPosts = fetch('/api/wallpost', {
+  const getAllWallPosts = async () => {
+    const getWallPosts = await fetch('/api/wallpost', {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
