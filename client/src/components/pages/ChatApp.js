@@ -27,18 +27,18 @@ const chatUsername = async () => {
 };
 
 class ChatApp extends Component {
-  // componentDidMount() {
-    // chatUsername().then((gitHubHandle) => {
-    //   // const gitHubHandle = chatUsername();
-    //   this.setState({
-    //     member: { username: gitHubHandle.CurrentUserGitHubHandle },
-    //   });
-    // });
-  // }
+  componentDidMount() {
+    chatUsername().then((gitHubHandle) => {
+      // const gitHubHandle = chatUsername();
+      this.setState({
+        member: { username: gitHubHandle.CurrentUserGitHubHandle },
+      });
+    });
+  }
   state = {
     messages: [],
     member: {
-      username: '',
+      username: [],
       color: randomColor(),
     },
   };
@@ -81,14 +81,16 @@ class ChatApp extends Component {
   }
 
   onSendMessage = (message) => {
-        chatUsername().then((gitHubHandle) => {
-          
-          console.log(gitHubHandle.CurrentUserGitHubHandle + 'in th onsendmessage====================')
-          // const gitHubHandle = chatUsername();
-          this.setState({
-            member: { username: gitHubHandle.CurrentUserGitHubHandle },
-          });
-        });
+    // chatUsername().then((gitHubHandle) => {
+    //   console.log(
+    //     gitHubHandle.CurrentUserGitHubHandle +
+    //       'in th onsendmessage===================='
+    //   );
+    //   // const gitHubHandle = chatUsername();
+    //   this.setState({
+    //     member: { username: gitHubHandle.CurrentUserGitHubHandle },
+    //   });
+    // });
 
     this.drone.publish({
       room: 'observable-room',
