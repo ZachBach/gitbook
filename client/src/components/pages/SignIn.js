@@ -2,8 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import '../styles/SignUp.css';
 import Particles from '../layout/Particles';
-import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
-
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext';
 
 function SignIn({ icon }) {
   const currentUserContext = useContext(CurrentUserContext);
@@ -20,9 +19,9 @@ function SignIn({ icon }) {
     //   .then((result) => {
     //     return result[0].CurrentUserToken;
     //   });
-    await currentUserContext.updateCurrentUser()
-    console.log("this is from SIGNINNNNN")
-    console.log(currentUserContext)
+    await currentUserContext.updateCurrentUser();
+    console.log('this is from SIGNINNNNN');
+    console.log(currentUserContext);
     fakeAuth.authenticate(currentUserContext.CurrentUserToken);
   };
 
@@ -35,7 +34,7 @@ function SignIn({ icon }) {
           // className='col-12 col-sm-6 col-md-3'
           />
           <div className='form-group'></div>
-          <a href='http://localhost:3001/auth/github'>
+          <a href='/auth/github'>
             <button className={icon} onClick={handleClick}>
               {' '}
               Sign In with Github

@@ -32,7 +32,8 @@ if (process.env.NODE_ENV === 'production') {
 // Use apiRoutes
 const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
 const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
-const GITHUB_CALLBACK_URL = 'http://127.0.0.1:3001/auth/github/callback';
+const GITHUB_CALLBACK_URL =
+  'https://gitcomm-it.herokuapp.com/auth/github/callback';
 
 passport.use(
   new GitHubStrategy(
@@ -44,9 +45,8 @@ passport.use(
     function (accessToken, refreshToken, profile, cb) {
       gitHub(profile);
       createCurrentUser(profile, accessToken);
-             console.log(profile);
-          
-       
+      console.log(profile);
+
       return cb(null, profile);
     }
   )
@@ -104,7 +104,7 @@ app.get(
   function (req, res) {
     console.log('authenticated');
     // Successful authentication, redirect home.
-    res.redirect('http://127.0.0.1:3000/home');
+    res.redirect('https://gitcomm-it.herokuapp.com/home');
   }
 );
 
