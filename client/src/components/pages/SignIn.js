@@ -34,7 +34,7 @@ function SignIn({ icon }) {
           // className='col-12 col-sm-6 col-md-3'
           />
           <div className='form-group'></div>
-          <a href='/auth/github'>
+          <a href='http://localhost:3001/auth/github'>
             <button className={icon} onClick={handleClick}>
               {' '}
               Sign In with Github
