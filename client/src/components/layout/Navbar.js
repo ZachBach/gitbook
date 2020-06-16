@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext';
 
 const Navbar = ({ icon, title }) => {
   const currentUserContext = useContext(CurrentUserContext);
@@ -15,7 +15,11 @@ const Navbar = ({ icon, title }) => {
           <Link to='/home'>Home</Link>
         </li>
         <li>
-          <Link to='/'>{currentUserContext.CurrentUserGitHubHandle === null ? "Log in" : "Log out"}</Link>
+          <Link to='/'>
+            {currentUserContext.CurrentUserGitHubHandle === null
+              ? 'Log in'
+              : 'Log out'}
+          </Link>
         </li>
         <li>
           <Link to='/search'>Search</Link>

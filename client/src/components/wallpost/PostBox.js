@@ -1,26 +1,28 @@
-import React, { useContext } from 'react';
-import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
+import React, { useContext, useEffect } from 'react';
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext';
+import { WallContext } from '../../context/wall/wallContext';
 
 const PostBox = () => {
   const currentUserContext = useContext(CurrentUserContext);
-  fetch('/api/wallpost', {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-    },
-  })
-    .then((data) => data.json())
-    .then((result) => {
-      console.log(result);
-    });
+  const wallContext = useContext(WallContext);
 
+  const { postArray } = wallContext;
+
+  useEffect(() => {
+    wallContext.getAllWallPosts();
+  }, []);
+
+  console.log(postArray);
   return (
     <div>
       <div className='form-group'>
         <label>{currentUserContext.CurrentUserGitHubHandle}</label>
-        <div className='form-control' id='exampleFormControlTextarea1' rows='3'>
-          Message
+        <div className='form-control' id='exampleFormControlTextarea1'>
+          {postArray &&
+            postArray.map((post) => {
+              console.log(post);
+              return <p key={post.id}> {post.wallPostContent} </p>;
+            })}
         </div>
       </div>
     </div>
