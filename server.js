@@ -1,5 +1,4 @@
 const express = require('express');
-// const connection = require('./config/db')
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -12,11 +11,6 @@ const app = express();
 app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 3001;
-
-// //connect to the database
-// connection();
-
-// app.get('/', (req, res) => res.send('API running'));
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -34,11 +28,6 @@ app.use(passport.session());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
-// Define Routes
-// app.use('/api/users', require('./routes/api/users'));
-// app.use('/api/auth', require('./routes/api/auth'));
-// app.use('/api/profile', require('./routes/api/profile'));
-// app.use('/api/posts', require('./routes/api/posts'));
 
 // Use apiRoutes
 const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
@@ -55,8 +44,10 @@ passport.use(
     function (accessToken, refreshToken, profile, cb) {
       gitHub(profile);
       createCurrentUser(profile, accessToken);
-      /*       console.log(accessToken, refreshToken, profile);
-       */ return cb(null, profile);
+             console.log(profile);
+          
+       
+      return cb(null, profile);
     }
   )
 );
@@ -80,8 +71,7 @@ const gitHub = async (profileData, res) => {
     });
 };
 const createCurrentUser = async (profileData, accessToken, res) => {
-  // console.log("TOOOOKENNNNNNNNN " + accessToken)
-  console.log('TOOOOKENNNNNNNNN ' + accessToken);
+  // console.log('TOOOOKENNNNNNNNN ' + accessToken);
   await db.CurrentUser.create({
     CurrentUserId: profileData.id,
     CurrentUserToken: accessToken,
