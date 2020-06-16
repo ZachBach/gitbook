@@ -5,7 +5,8 @@ import Input from '../../Input';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import SignIn from './SignIn';
 
-// function randomName() {
+
+
 //   const adjectives = [
 //     "autumn", "hidden", "bitter", "misty", "silent", "empty", "dry", "dark",
 //     "summer", "icy", "delicate", "quiet", "white", "cool", "spring", "winter",
@@ -31,6 +32,32 @@ import SignIn from './SignIn';
 //   const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
 //   const noun = nouns[Math.floor(Math.random() * nouns.length)];
 //   return adjective + noun;
+
+
+// const chatUsername = () => {
+//   fetch('/api/currentuser', {
+//       method: 'GET',
+//       headers: {
+//         'Content-type': 'application/json',
+//         Accept: 'application/json',
+//       },
+//     })
+//       .then((data) => 
+//       data.json())      
+//     .then((result) => {
+//       console.log('in the dot then')
+//       console.log(result[0].CurrentUserGitHubHandle);
+//       currentGithubHandle = result[0].CurrentUserGitHubHandle;
+//       return currentGithubHandle;
+//     })
+//   }
+  
+// chatUsername(currentGithubHandle)
+// console.log(currentGithubHandle)
+
+// function githubHandle() {
+//   const chatName = [this.currentGithubHandle];
+//   console.log(chatName);
 // }
 
 function randomColor() {
