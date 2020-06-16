@@ -4,6 +4,8 @@ import Messages from '../../Messages';
 import Input from '../../Input';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import SignIn from './SignIn';
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
+import CurrentUserState from '../../context/currentUser/currentUserState';
 
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
@@ -43,6 +45,31 @@ class ChatApp extends Component {
     },
   };
 
+  // static contextType = CurrentUserContext;
+
+
+  // componentDidMount() {
+  //   const context = this.context;
+
+  //   const { member } = { ...this.state };
+  //   const currentState = member;
+  //   const { username, color } = context.CurrentUserGitHubHandle;
+  //   currentState[username] = color;
+
+  //   this.setState({ member: currentState });
+
+  //   console.log(this.state.member)
+
+
+
+  //   // var member2 = { ...this.state.member }
+  //   // member2.username = context.CurrentUserGitHubHandle
+  //   // console.log("MEMBER ")
+  //   // console.log(member2)
+  //   // this.setState({ member2 });
+
+  // }
+
   constructor() {
     super();
     this.drone = new window.Scaledrone('v0EiAhIDZNsEFNfj', {
@@ -63,6 +90,7 @@ class ChatApp extends Component {
       this.setState({ messages });
     });
   }
+
 
   render() {
     return (

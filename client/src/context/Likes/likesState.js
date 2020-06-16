@@ -6,40 +6,43 @@ import { CurrentUserContext } from '../../context/currentUser/currentUserContext
 
 const LikesState = (props) => {
   const currentUserContext = useContext(CurrentUserContext);
+  const currentUser = currentUserContext.CurrentUserGitHubHandle
+  var currentid = props["children"]["props"]["children"][0]["props"]["postid"]
   var initialState = {
     likesCount: 0,
     status: false,
-    postid: 50,
-    userid: currentUserContext.CurrentUserGitHubHandle
+    postid: currentid,
+    userid: currentUser
   };
 
   const [state, dispatch] = useReducer(LikesReducer, initialState);
 
-  // const getLikes = async () => {
-  //   const getdata = fetch('/api/likes', {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-type': 'application/json',
-  //       Accept: 'application/json',
-  //     },
-  //   })
-  //     .then((data) => data.json())
-  //     .then((result) => {
-  //       console.log("from GETLIKES FUNCTION")
-  //       console.log(result)
-  //       return result;
-  //     })
-  // }
+  const getLikes = async () => {
+    const getdata = fetch('/api/likes', {
+      method: 'GET',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((data) => data.json())
+      .then((result) => {
+        return result;
+      })
+    return getdata
+  }
 
 
-  // const onLoad = async () => {
-  //   console.log("this is from OnLOAD FUCNTIOn")
-  //   const temp = await getLikes
-  //   await dispatch({
-  //     type: LOAD,
-  //     payload: getLikes
-  //   })
-  // }
+  const onLoad = async () => {
+    let temp = await getLikes
+    if (getLikes.likesCount === undefined) {
+      temp = initialState
+    }
+    await dispatch({
+      type: LOAD,
+      payload: temp
+    })
+  }
 
   const likeClicked = async () => {
     fetch('/api/likes', {
@@ -52,12 +55,11 @@ const LikesState = (props) => {
     })
       .then((data) => data.json())
       .then((result) => {
-        console.log('FROm CURRENT LIKES STATE')
-        console.log(result);
         return result;
       });
     await dispatch({
-      type: LIKED
+      type: LIKED,
+      payload: currentid
     });
   };
 
@@ -72,16 +74,15 @@ const LikesState = (props) => {
     })
       .then((data) => data.json())
       .then((result) => {
-        console.log('FROm CURRENT LIKES STATE')
-        console.log(result);
         return result;
       });
     await dispatch({
-      type: UNLIKED
+      type: UNLIKED,
+      payload: currentid
     })
   }
   return (
-    <LikesContext.Provider value={{ ...state, likeClicked, unlikeClicked }}>
+    <LikesContext.Provider value={{ ...state, likeClicked, unlikeClicked, onLoad }}>
       {props.children}
     </LikesContext.Provider>
   );
