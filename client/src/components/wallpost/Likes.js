@@ -5,7 +5,8 @@ import { LikesContext } from '../../context/Likes/likesContext';
 const Likes = () => {
 
   const likesContext2 = useContext(LikesContext);
-
+  console.log("THIS IS LIKES CONTEXT")
+  console.log(likesContext2)
 
   // useEffect(() => { likesContext2.onLoad(), [] })
 

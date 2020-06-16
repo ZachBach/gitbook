@@ -4,6 +4,8 @@ import Messages from "../../Messages";
 import Input from "../../Input";
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import SignIn from './SignIn';
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
+import CurrentUserState from '../../context/currentUser/currentUserState';
 
 // function randomName() {
 //   const adjectives = [
@@ -41,33 +43,59 @@ function randomColor() {
 // console.log(data) 
 // console.log(SignIn(data));
 
-const chatUsername = async () => {
-    const getCurrentUser = await fetch('/api/currentuser', {
-      method: 'GET',
-      headers: {
-        'Content-type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
-      .then((data) => data.json())
-      .then((result) => {
-        console.log('---------inside dot then of chatUsername function-------')
-        console.log(result[0]);
-        return result[0];
-      });
-  }
+// const chatUsername = async () => {
+//   const getCurrentUser = await fetch('/api/currentuser', {
+//     method: 'GET',
+//     headers: {
+//       'Content-type': 'application/json',
+//       Accept: 'application/json',
+//     },
+//   })
+//     .then((data) => data.json())
+//     .then((result) => {
+//       console.log('---------inside dot then of chatUsername function-------')
+//       console.log(result[0]);
+//       return result[0];
+//     });
+// }
 
 class ChatApp extends Component {
   state = {
     messages: [],
     member: {
-      username: chatUsername,
+      username: "Dummy",
       color: randomColor(),
     }
   }
 
+  static contextType = CurrentUserContext;
+
+
+  componentDidMount() {
+    const context = this.context;
+
+    const { member } = { ...this.state };
+    const currentState = member;
+    const { username, color } = context.CurrentUserGitHubHandle;
+    currentState[username] = color;
+
+    this.setState({ member: currentState });
+
+    console.log(this.state.member)
+
+
+
+    // var member2 = { ...this.state.member }
+    // member2.username = context.CurrentUserGitHubHandle
+    // console.log("MEMBER ")
+    // console.log(member2)
+    // this.setState({ member2 });
+
+  }
+
   constructor() {
     super();
+
     this.drone = new window.Scaledrone("v0EiAhIDZNsEFNfj", {
       data: this.state.member
     });
@@ -75,31 +103,33 @@ class ChatApp extends Component {
       if (error) {
         return console.error(error);
       }
-      const member = {...this.state.member};
+      const member = { ...this.state.member };
       member.id = this.drone.clientId;
-      this.setState({member});
+      this.setState({ member });
     });
     const room = this.drone.subscribe("observable-room");
     room.on('data', (data, member) => {
       const messages = this.state.messages;
-      messages.push({member, text: data});
-      this.setState({messages});
+      messages.push({ member, text: data });
+      this.setState({ messages });
     });
   }
+
 
   render() {
     return (
       <div className="App">
+
         <div className="App-header">
           <h1>Git.Chat</h1>
         </div>
-        <Messages id = "chatMessages"
+
+        <Messages id="chatMessages"
           messages={this.state.messages}
-          currentMember={this.state.member}
+          currentMember={this.state.username}
         />
-        <Input id = "chatInput"
-          onSendMessage={this.onSendMessage}
-        />
+        <Input id="chatInput" onSendMessage={this.onSendMessage} />
+
       </div>
     );
   }
