@@ -4,10 +4,8 @@ import Reply from './Reply';
 import PostBox from './PostBox';
 import LikesState from '../../context/Likes/likesState';
 
-
 const WallPost = () => {
-
-  const wallpostId = 2
+  const wallpostId = 2;
 
   return (
     <LikesState>

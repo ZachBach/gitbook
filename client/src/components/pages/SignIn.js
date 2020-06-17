@@ -43,13 +43,12 @@ function SignIn({ icon }) {
         <div id='loginSection' className='row'>
           <div />
           <div className='form-group'> </div>
-          <a href={currentUserContext.CurrentUserToken === undefined ? signInLink : signOutLink}>
-            <button className={icon} onClick={currentUserContext.CurrentUserToken === undefined ? handleClick : signOut}>
+          <a href={currentUserContext.CurrentUserToken === null ? signInLink : signOutLink}>
+            <button className={icon} onClick={currentUserContext.CurrentUserToken === null ? handleClick : signOut}>
               {' '}
-              {currentUserContext.CurrentUserToken === undefined ? signInText : signOutText}
+              {currentUserContext.CurrentUserToken === null ? signInText : signOutText}
             </button>
           </a>
-
         </div>
       </div>
     </div>
