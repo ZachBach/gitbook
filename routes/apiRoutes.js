@@ -70,15 +70,12 @@ router.get('/api/wallpost', (req, res) => {
 //   console.log(req.body);
 // });
 
-
-
-
 router.post('/api/likes', async (req, res) => {
   await db.Likes.create({
     likescount: req.body.likesCount,
     status: req.body.status,
     userid: req.body.userid,
-    postid: req.body.postid
+    postid: req.body.postid,
   })
     .then((result) => {
       res.json(result);
@@ -121,7 +118,7 @@ router.post('/api/wallpost', async (req, res) => {
     wallPostId: req.body.wallPostId,
     wallPostContent: req.body.wallPostContent,
     userid: req.body.userid,
-    parentpostid: req.body.parentpostid
+    parentpostid: req.body.parentpostid,
   })
     .then((newpost) => {
       console.log('in the dot then of wall post route');

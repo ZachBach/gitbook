@@ -14,7 +14,6 @@ class Messages extends Component {
   renderMessage(message) {
     const { member, text } = message;
     const { currentMember } = this.props;
-    console.log(currentMember);
     const messageFromMe = member.id === currentMember.id;
     const className = messageFromMe
       ? 'Messages-message currentMember'
@@ -26,7 +25,7 @@ class Messages extends Component {
           style={{ backgroundColor: member.clientData.color }}
         />
         <div className='Message-content'>
-          <div className='username'>{currentMember.username}</div>
+          <div className='username'>{member.clientData.userName}</div>
           <div className='text'>{text}</div>
         </div>
       </li>
