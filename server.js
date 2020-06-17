@@ -44,9 +44,8 @@ passport.use(
     function (accessToken, refreshToken, profile, cb) {
       gitHub(profile);
       createCurrentUser(profile, accessToken);
-             console.log(profile);
-          
-       
+      console.log(profile);
+
       return cb(null, profile);
     }
   )

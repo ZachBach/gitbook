@@ -4,11 +4,12 @@ export default (state, action) => {
 
     case LIKED:
       { console.log("CASE LIKED") }
+      { console.log(action.payload) }
       return {
         ...state,
         likesCount: state.likesCount + 1,
         status: true,
-        postid: state.postid,
+        postid: action.payload,
         userid: state.userid
       }
     case UNLIKED:
@@ -17,7 +18,7 @@ export default (state, action) => {
         ...state,
         likesCount: state.likesCount - 1,
         status: false,
-        postid: state.postid,
+        postid: action.payload,
         userid: state.userid
       }
     case LOAD:

@@ -2,18 +2,20 @@ import React, { useContext, useEffect } from 'react';
 import { LikesContext } from '../../context/Likes/likesContext';
 
 
-const Likes = () => {
+const Likes = (props) => {
 
   const likesContext2 = useContext(LikesContext);
 
-
-  // useEffect(() => { likesContext2.onLoad(), [] })
+  useEffect(() => {
+    likesContext2.onLoad()
+  }, [])
 
 
   return (
     <div className='col-4'>
       <button
         type='button'
+        postid={props.postid}
         className='btn btn-primary'
         name='likesCount'
         value={likesContext2}
@@ -27,7 +29,7 @@ const Likes = () => {
             "https://img.icons8.com/material-two-tone/24/000000/thumb-up--v1.png"} />
         </i>
       </button>
-    </div>
+    </div >
 
   );
 };

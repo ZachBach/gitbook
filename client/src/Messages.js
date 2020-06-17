@@ -26,7 +26,7 @@ class Messages extends Component {
           style={{ backgroundColor: member.clientData.color }}
         />
         <div className='Message-content'>
-          <div className='username'>{member.username}</div>
+          <div className='username'>{currentMember.username}</div>
           <div className='text'>{text}</div>
         </div>
       </li>
