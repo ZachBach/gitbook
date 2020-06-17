@@ -23,8 +23,6 @@ const CurrentUserState = (props) => {
         })
             .then((data) => data.json())
             .then((result) => {
-                console.log('FROm CURRENT USER STATE')
-                console.log(result[0]);
                 return result[0];
             })
         dispatch({
