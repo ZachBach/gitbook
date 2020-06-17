@@ -70,7 +70,19 @@ router.get('/api/wallpost', (req, res) => {
 //   console.log(req.body);
 // });
 
-
+router.delete('/api/delete', async (req, res) => {
+  await db.CurrentUser.destroy({
+    where: {
+      //id = x
+    }
+  })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
 
 
 router.post('/api/likes', async (req, res) => {
@@ -95,19 +107,19 @@ router.get('/api/likes', (req, res) => {
   });
 });
 
-router.post('/api/currentuser', async (req, res) => {
-  await db.WallPost.create({
-    CurrentUserId: req.body.wallPostId,
-    wallPostContent: req.body.wallPostContent,
-  })
-    .then((newpost) => {
-      console.log('in the dot then of wall post route');
-      res.json(newpost);
-    })
-    .catch((err) => {
-      res.status(404).json(err);
-    });
-});
+// router.post('/api/currentuser', async (req, res) => {
+//   await db.WallPost.create({
+//     CurrentUserId: req.body.wallPostId,
+//     wallPostContent: req.body.wallPostContent,
+//   })
+//     .then((newpost) => {
+//       console.log('in the dot then of wall post route');
+//       res.json(newpost);
+//     })
+//     .catch((err) => {
+//       res.status(404).json(err);
+//     });
+// });
 
 router.get('/api/currentuser', (req, res) => {
   db.CurrentUser.findAll({}).then((data) => {

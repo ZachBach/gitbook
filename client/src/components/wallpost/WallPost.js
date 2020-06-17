@@ -9,7 +9,6 @@ const WallPost = () => {
 
   const wallpostId = 2
 
-
   return (
     <LikesState>
       <div>
