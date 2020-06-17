@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import '../../App.css';
 import Messages from '../../Messages';
 import Input from '../../Input';
-import { fakeAuth } from '../privateroute/PrivateRoute';
-import SignIn from './SignIn';
-import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
-import CurrentUserState from '../../context/currentUser/currentUserState';
 
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
@@ -29,71 +25,44 @@ const chatUsername = async () => {
 };
 
 class ChatApp extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      messages: [],
+      member: {
+        username: 'WHY Delicate Flower',
+        color: randomColor(),
+      },
+    };
+  }
+
   componentDidMount() {
     chatUsername().then((gitHubHandle) => {
-      // const gitHubHandle = chatUsername();
+      // this is where we will pass the Githubhandle below
+      this.startRoom(Math.random());
       this.setState({
         member: { username: gitHubHandle.CurrentUserGitHubHandle },
       });
     });
   }
-  state = {
-    messages: [],
-    member: {
-      username: [],
-      color: randomColor(),
-    },
-  };
 
-  // static contextType = CurrentUserContext;
-
-
-  // componentDidMount() {
-  //   const context = this.context;
-
-  //   const { member } = { ...this.state };
-  //   const currentState = member;
-  //   const { username, color } = context.CurrentUserGitHubHandle;
-  //   currentState[username] = color;
-
-  //   this.setState({ member: currentState });
-
-  //   console.log(this.state.member)
-
-
-
-  //   // var member2 = { ...this.state.member }
-  //   // member2.username = context.CurrentUserGitHubHandle
-  //   // console.log("MEMBER ")
-  //   // console.log(member2)
-  //   // this.setState({ member2 });
-
-  // }
-
-  constructor() {
-        super();
-
-        chatUsername().then((gitHubHandle) => {
-          console.log(
-            gitHubHandle.CurrentUserGitHubHandle +
-              'in th onsendmessage===================='
-          );
-          // const gitHubHandle = chatUsername();
-          this.setState({
-            member: { username: gitHubHandle.CurrentUserGitHubHandle },
-          });
-        });
-      
-
+  startRoom = (name) => {
     this.drone = new window.Scaledrone('v0EiAhIDZNsEFNfj', {
-      data: this.state.member,
+      data: {
+        userName: name,
+        color: randomColor(),
+      },
     });
+
     this.drone.on('open', (error) => {
       if (error) {
         return console.error(error);
       }
       const member = { ...this.state.member };
       member.id = this.drone.clientId;
+      member.user = this.state.member.username;
+
       this.setState({ member });
     });
     const room = this.drone.subscribe('observable-room');
@@ -102,8 +71,7 @@ class ChatApp extends Component {
       messages.push({ member, text: data });
       this.setState({ messages });
     });
-  }
-
+  };
 
   render() {
     return (
@@ -122,17 +90,6 @@ class ChatApp extends Component {
   }
 
   onSendMessage = (message) => {
-    // chatUsername().then((gitHubHandle) => {
-    //   console.log(
-    //     gitHubHandle.CurrentUserGitHubHandle +
-    //       'in th onsendmessage===================='
-    //   );
-    //   // const gitHubHandle = chatUsername();
-    //   this.setState({
-    //     member: { username: gitHubHandle.CurrentUserGitHubHandle },
-    //   });
-    // });
-
     this.drone.publish({
       room: 'observable-room',
       message,
