@@ -30,17 +30,21 @@ const CurrentUserState = (props) => {
                 return result[0];
             })
 
-        const authenticated = await db.user.where("token").equals(getCurrentUser.CurrentUserToken)
-        console.log(authenticated)
-        console.log("above is autenticated or now")
-        db.user.add({ token: getCurrentUser.CurrentUserToken, handle: getCurrentUser.CurrentUserGitHubHandle }).catch((err) => {
-            console.log(err)
-        })
+        const authenticated = await db.user.where("token").equals(getCurrentUser.CurrentUserToken).toArray()
+        console.log(authenticated.length)
+        if (authenticated.length < 1) {
+            console.log("You are not Logged in!!")
+            return
+        } else {
+            db.user.add({ token: getCurrentUser.CurrentUserToken, handle: getCurrentUser.CurrentUserGitHubHandle }).catch((err) => {
+                console.log(err)
+            })
 
-        dispatch({
-            type: IS_AUTHENTICATED,
-            payload: getCurrentUser
-        });
+            dispatch({
+                type: IS_AUTHENTICATED,
+                payload: getCurrentUser
+            });
+        }
 
 
     };
