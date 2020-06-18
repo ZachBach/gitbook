@@ -10,7 +10,10 @@ const WallPost = () => {
   return (
     <LikesState>
       <div>
-        <PostBox postid={wallpostId} />
+        {/* <PostBox postid={wallpostId} /> */}
+        {postArray &&
+            postArray.map((post) =>
+              <PostBox post = {post.wallPostContent} />)}
         <div className='row'>
           <Likes />
           <Reply />

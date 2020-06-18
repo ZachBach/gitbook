@@ -17,12 +17,12 @@ const PostBox = () => {
     <div>
       <div className='form-group'>
         <label>{currentUserContext.CurrentUserGitHubHandle}</label>
+        
         <div className='form-control' id='exampleFormControlTextarea1'>
-          {postArray &&
-            postArray.map((post) => {
-              console.log(post);
-              return <p key={post.id}> {post.wallPostContent} </p>;
-            })}
+          {/* {postArray &&
+            postArray.map((post) => (
+              <p key={post.id}> {post.wallPostContent} </p>
+            ))} */}
         </div>
       </div>
     </div>
