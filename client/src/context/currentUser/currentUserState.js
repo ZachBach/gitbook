@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import { CurrentUserContext } from './currentUserContext'
 import { IS_AUTHENTICATED } from '../types';
 import CurrentUserReducer from './currentUserReducer';
-import Dexie from 'dexie'
+import db from './DexieCurrentUser'
 
 const CurrentUserState = (props) => {
     var initialState = {
@@ -13,10 +13,6 @@ const CurrentUserState = (props) => {
 
     const [state, dispatch] = useReducer(CurrentUserReducer, initialState);
 
-    const db = new Dexie("CurrentUser")
-    db.version(1).stores({
-        user: "token, handle"
-    })
     db.open().catch((err) => {
         console.log(err.stack || err)
     })
@@ -34,7 +30,12 @@ const CurrentUserState = (props) => {
                 return result[0];
             })
 
-        db.user.add({ token: getCurrentUser.CurrentUserToken, handle: getCurrentUser.CurrentUserGitHubHandle })
+        const authenticated = await db.user.where("token").equals(getCurrentUser.CurrentUserToken)
+        console.log(authenticated)
+        console.log("above is autenticated or now")
+        db.user.add({ token: getCurrentUser.CurrentUserToken, handle: getCurrentUser.CurrentUserGitHubHandle }).catch((err) => {
+            console.log(err)
+        })
 
         dispatch({
             type: IS_AUTHENTICATED,

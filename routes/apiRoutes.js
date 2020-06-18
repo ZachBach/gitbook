@@ -10,10 +10,10 @@ router.get('/api/wallpost', (req, res) => {
   });
 });
 
-router.delete('/api/delete :token', async (req, res) => {
+router.delete('/api/delete/:token', async (req, res) => {
   await db.CurrentUser.destroy({
     where: {
-      //id = x
+      CurrentUserToken: req.params.token
     }
   })
     .then((result) => {

@@ -3,9 +3,11 @@ import { fakeAuth } from '../privateroute/PrivateRoute';
 import '../styles/SignUp.css';
 import Particles from '../layout/Particles';
 import { CurrentUserContext } from '../../context/currentUser/currentUserContext';
+import db from '../../context/currentUser/DexieCurrentUser'
 
 function SignIn({ icon }) {
   const currentUserContext = useContext(CurrentUserContext);
+
 
   const handleClick = async (e) => {
     await currentUserContext.updateCurrentUser();
@@ -15,7 +17,8 @@ function SignIn({ icon }) {
   };
 
   const signOut = async () => {
-    const delCurrentUser = await fetch('/api/delete', {
+    db.user.delete(currentUserContext.CurrentUserToken)
+    const delCurrentUser = await fetch('/api/delete/' + currentUserContext.CurrentUserToken, {
       method: 'DELETE',
       body: JSON.stringify(currentUserContext.CurrentUserToken),
       headers: {
@@ -25,6 +28,7 @@ function SignIn({ icon }) {
     })
       .then((data) => data.json())
       .then((result) => {
+        console.log(result)
         return result;
       });
     return delCurrentUser
