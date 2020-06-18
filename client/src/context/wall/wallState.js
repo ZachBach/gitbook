@@ -23,8 +23,6 @@ const WallState = (props) => {
     })
       .then((data) => data.json())
       .then((result) => {
-        console.log('FETCHED RESULTS FROM WALL POSTS');
-        console.log(result);
         return result;
       });
 

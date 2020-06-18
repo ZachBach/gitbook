@@ -12,17 +12,15 @@ const PostBox = () => {
     wallContext.getAllWallPosts();
   }, []);
 
-  console.log(postArray);
   return (
     <div>
       <div className='form-group'>
         <label>{currentUserContext.CurrentUserGitHubHandle}</label>
-        
-        <div className='form-control' id='exampleFormControlTextarea1'>
+        <div className='form-control'>
           {/* {postArray &&
-            postArray.map((post) => (
-              <p key={post.id}> {post.wallPostContent} </p>
-            ))} */}
+            postArray.map((post) => {
+              return <p key={post.id}> {post.wallPostContent} </p>;
+            })} */}
         </div>
       </div>
     </div>
