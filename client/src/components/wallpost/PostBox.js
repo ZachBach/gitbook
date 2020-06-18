@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../context/currentUser/currentUserContext';
 import { WallContext } from '../../context/wall/wallContext';
+import Likes from './Likes';
+import Reply from './Reply';
 
 const PostBox = () => {
   const currentUserContext = useContext(CurrentUserContext);
@@ -12,18 +14,23 @@ const PostBox = () => {
     wallContext.getAllWallPosts();
   }, []);
 
-  console.log(postArray);
   return (
     <div>
       <div className='form-group'>
         <label>{currentUserContext.CurrentUserGitHubHandle}</label>
-        <div className='form-control' id='exampleFormControlTextarea1'>
           {postArray &&
             postArray.map((post) => {
-              console.log(post);
-              return <p key={post.id}> {post.wallPostContent} </p>;
-            })}
-        </div>
+              return (
+                <div>
+                <div className='form-control'>
+                  <p key={post.id}> {post.wallPostContent} </p>
+                  </div>
+                  <div className='row'>
+                    <Likes />
+                    <Reply />
+                  </div>
+                </div>
+              );})}
       </div>
     </div>
   );
