@@ -47,26 +47,13 @@ router.get('/api/likes', (req, res) => {
   });
 });
 
-// router.post('/api/currentuser', async (req, res) => {
-//   await db.WallPost.create({
-//     CurrentUserId: req.body.wallPostId,
-//     wallPostContent: req.body.wallPostContent,
-//   })
-//     .then((newpost) => {
-//       console.log('in the dot then of wall post route');
-//       res.json(newpost);
-//     })
-//     .catch((err) => {
-//       res.status(404).json(err);
-//     });
-// });
-
 router.get('/api/currentuser', (req, res) => {
   db.CurrentUser.findAll({}).then((data) => {
     console.log(data);
     res.json(data);
   });
 });
+
 
 router.post('/api/wallpost', async (req, res) => {
   await db.WallPost.create({
@@ -84,6 +71,30 @@ router.post('/api/wallpost', async (req, res) => {
     });
 });
 
+router.get('/api/replypost', (req, res) => {
+  db.ReplyPost.findAll({}).then((data) => {
+    console.log(data);
+    res.json(data);
+  });
+});
+
+router.post('/api/replypost', async (req, res) => {
+  await db.ReplyPost.create({
+    replyPostId: req.body.replyPostId,
+    replyPostContent: req.body.replyPostContent,
+    userid: req.body.userid,
+    parentpostid: req.body.parentpostid,
+  })
+    .then((newReplyPost) => {
+      console.log('in the dot then of reply post route');
+      res.json(newReplyPost);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
+
+
 router.post('/api/signup', async (req, res) => {
   await db.User.create({
     firstName: req.body.firstName,
@@ -100,3 +111,18 @@ router.post('/api/signup', async (req, res) => {
 });
 
 module.exports = router;
+
+
+// router.post('/api/currentuser', async (req, res) => {
+//   await db.WallPost.create({
+//     CurrentUserId: req.body.wallPostId,
+//     wallPostContent: req.body.wallPostContent,
+//   })
+//     .then((newpost) => {
+//       console.log('in the dot then of wall post route');
+//       res.json(newpost);
+//     })
+//     .catch((err) => {
+//       res.status(404).json(err);
+//     });
+// });
