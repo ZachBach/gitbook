@@ -10,10 +10,10 @@ router.get('/api/wallpost', (req, res) => {
   });
 });
 
-router.delete('/api/delete/:token', async (req, res) => {
+router.delete('/api/delete/:id', async (req, res) => {
   await db.CurrentUser.destroy({
     where: {
-      CurrentUserToken: req.params.token
+      CurrentUserGitHubHandle: req.params.id
     }
   })
     .then((result) => {
@@ -23,6 +23,8 @@ router.delete('/api/delete/:token', async (req, res) => {
       res.status(404).json(err);
     });
 });
+
+
 
 
 router.post('/api/likes', async (req, res) => {
@@ -83,6 +85,7 @@ router.post('/api/wallpost', async (req, res) => {
       res.status(404).json(err);
     });
 });
+
 
 router.post('/api/signup', async (req, res) => {
   await db.User.create({

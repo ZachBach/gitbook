@@ -3,6 +3,7 @@ import '../../App.css';
 import Messages from '../../Messages';
 import Input from '../../Input';
 
+
 function randomColor() {
   return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
 }
@@ -24,6 +25,8 @@ const chatUsername = async () => {
   return getCurrentUser;
 };
 
+const curuser = localStorage.getItem("user")
+
 class ChatApp extends Component {
   constructor() {
     super();
@@ -40,7 +43,7 @@ class ChatApp extends Component {
   componentDidMount() {
     chatUsername().then((gitHubHandle) => {
       // this is where we will pass the Githubhandle below
-      this.startRoom(Math.random());
+      this.startRoom(curuser);
       this.setState({
         member: { username: gitHubHandle.CurrentUserGitHubHandle },
       });

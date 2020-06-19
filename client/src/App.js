@@ -55,7 +55,7 @@ const App = () => {
                 <Route exact path='/' component={Home} />
                 <PrivateRoute path='/admin' component={Admin} /> */}
                     <Route exact path='/chat' component={ChatApp} />
-                    <Route exact path='/home' component={Wall} />
+                    <Route path='/home' component={Wall} />
                     <Route exact path='/search' component={Home} />
                     <Route exact path='/about' component={About} />
                     <Route exact path='/user/:login' component={User} />

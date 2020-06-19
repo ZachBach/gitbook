@@ -7,9 +7,8 @@ export default (state, action) => {
             { console.log(action.payload.CurrentUserGitHubHandle) }
             return {
                 ...state,
-                CurrentUserId: action.payload.CurrentUserId,
-                CurrentUserToken: action.payload.CurrentUserToken,
-                CurrentUserGitHubHandle: action.payload.CurrentUserGitHubHandle
+                // CurrentUserToken: action.payload.CurrentUserToken,
+                CurrentUserGitHubHandle: action.payload
             };
         default:
             return state;

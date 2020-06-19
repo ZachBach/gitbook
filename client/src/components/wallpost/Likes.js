@@ -29,6 +29,7 @@ const Likes = (props) => {
             "https://img.icons8.com/material-two-tone/24/000000/thumb-up--v1.png"} />
         </i>
       </button>
+      {likesContext2.likesCount}
     </div >
 
   );

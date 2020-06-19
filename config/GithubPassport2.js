@@ -30,7 +30,7 @@ app.get(
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/home');
+    // res.redirect('http://localhost:3000/home');
   }
 );
 
