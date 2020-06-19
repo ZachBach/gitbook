@@ -12,3 +12,4 @@ export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';
 export const WALL_POSTS = 'WALL_POSTS';
 export const UNLIKED = 'UNLIKED';
 export const LOAD = 'LOAD';
+export const REPLY_POSTS = 'REPLY_POSTS';

@@ -52,6 +52,11 @@ img {
   padding: 0 2rem;
 }
 
+/* Likes and Reply buttons */
+.row {
+  padding: 0 0 1rem;
+}
+
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
