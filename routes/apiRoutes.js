@@ -13,13 +13,8 @@ router.get('/api/wallpost', (req, res) => {
 router.delete('/api/delete/:id', async (req, res) => {
   await db.CurrentUser.destroy({
     where: {
-<<<<<<< HEAD
-      CurrentUserToken: req.params.token,
+      CurrentUserGitHubHandle: req.params.id,
     },
-=======
-      CurrentUserGitHubHandle: req.params.id
-    }
->>>>>>> 75a26b0d6f5ac83eb9f694840e20c701201465bb
   })
     .then((result) => {
       res.json(result);
@@ -29,12 +24,6 @@ router.delete('/api/delete/:id', async (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 75a26b0d6f5ac83eb9f694840e20c701201465bb
 router.post('/api/likes', async (req, res) => {
   await db.Likes.create({
     likescount: req.body.likesCount,
