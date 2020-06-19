@@ -1,22 +1,23 @@
-import React, { useState, useContext } from 'react';
-import { CurrentUserContext } from '../../context/currentUser/currentUserContext'
+import React, { useState, useContext, useEffect } from 'react';
+import { CurrentUserContext } from '../../context/currentUser/currentUserContext';
 
 const MessageBox = () => {
   const currentUserContext = useContext(CurrentUserContext);
-  const [msgTyped, setMsgTyped] = useState("");
+
+  const [msgTyped, setMsgTyped] = useState('');
 
   const onchange = (e) => {
     setMsgTyped(e.target.value);
-    console.log(msgTyped)
+    console.log(msgTyped);
   };
 
   const onsubmit = () => {
-    console.log(currentUserContext)
+    console.log(currentUserContext);
     var newPost = {
       wallPostId: Math.random() * 100000,
       wallPostContent: msgTyped,
       userid: currentUserContext.CurrentUserGitHubHandle,
-      parentpostid: currentUserContext.parentpostid
+      parentpostid: currentUserContext.parentpostid,
     };
 
     fetch('/api/wallpost', {
@@ -30,11 +31,12 @@ const MessageBox = () => {
       .then((data) => data.json())
       .then((result) => {
         console.log(result);
+        window.location.reload(false);
       });
   };
 
   return (
-    <div>
+    <form>
       <div className='form-group'>
         <label>{currentUserContext.CurrentUserGitHubHandle}</label>
         <textarea
@@ -48,7 +50,7 @@ const MessageBox = () => {
           Submit
         </button>
       </div>
-    </div >
+    </form>
   );
 };
 
