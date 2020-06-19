@@ -20,13 +20,15 @@ const PostBox = () => {
         <label>{currentUserContext.CurrentUserGitHubHandle}</label>
         {postArray &&
           postArray.map((post) => {
+            console.log('hjkadhjkadskhjashjkdashjkadhjkasdhjkadshjk');
+            console.log(post);
             return (
               <div>
                 <div className='form-control'>
                   <p key={post.id}> {post.wallPostContent} </p>
                 </div>
                 <div className='row'>
-                  <Likes />
+                  <Likes id={post.wallPostId} />
                   <Reply />
                 </div>
               </div>
