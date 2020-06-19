@@ -17,7 +17,7 @@ const LikesState = (props) => {
 
   const [state, dispatch] = useReducer(LikesReducer, initialState);
 
-  const getLikes = async () => {
+  const getLikes = () => {
     const getdata = fetch('/api/likes', {
       method: 'GET',
       headers: {
@@ -25,19 +25,34 @@ const LikesState = (props) => {
         Accept: 'application/json',
       },
     })
-      .then((data) => data.json())
+      .then((data) => {
+        console.log("THIS IS LIKES DATA")
+        console.log(data)
+        data.json()
+      })
       .then((result) => {
+        console.log(result)
+        console.log("jflasdjf;asdfasdf")
         return result;
       });
     return getdata;
   };
 
   const onLoad = async () => {
+<<<<<<< HEAD
     let temp;
     await getLikes().then((data) => (temp = data));
     // if (getLikes.likesCount === undefined) {
     //   temp = initialState;
     // }
+=======
+    let temp = await getLikes
+    console.log("GET LIKES")
+    console.log(temp)
+    if (getLikes.likesCount === undefined) {
+      temp = initialState
+    }
+>>>>>>> 75a26b0d6f5ac83eb9f694840e20c701201465bb
     await dispatch({
       type: LOAD,
       payload: temp,
@@ -65,8 +80,8 @@ const LikesState = (props) => {
   };
 
   const unlikeClicked = async () => {
-    fetch('/api/likes', {
-      method: 'POST',
+    fetch('/api/likes/:userid/:postid', {
+      method: 'DELETE',
       body: JSON.stringify(state),
       headers: {
         'Content-type': 'application/json',

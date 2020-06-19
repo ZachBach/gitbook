@@ -34,7 +34,13 @@ const Likes = (props) => {
           />
         </i>
       </button>
+<<<<<<< HEAD
     </div>
+=======
+      {likesContext2.likesCount}
+    </div >
+
+>>>>>>> 75a26b0d6f5ac83eb9f694840e20c701201465bb
   );
 };
 

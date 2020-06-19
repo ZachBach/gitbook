@@ -4,7 +4,7 @@ import Dexie from 'dexie'
 
 const db = new Dexie("CurrentUser")
 db.version(1).stores({
-    user: "token, handle"
+    user: "handle"
 })
 
 export default db
