@@ -69,6 +69,7 @@ const gitHub = async (profileData, res) => {
       res.status(404).json(err);
     });
 };
+
 const createCurrentUser = async (profileData, accessToken, res) => {
   // console.log('TOOOOKENNNNNNNNN ' + accessToken);
   await db.CurrentUser.create({

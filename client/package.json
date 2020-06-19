@@ -11,6 +11,7 @@
     "particles-bg": "^2.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-indexed-db": "^1.0.12",
     "react-particles-js": "^3.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"

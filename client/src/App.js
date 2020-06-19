@@ -14,15 +14,14 @@ import NotFound from './components/pages/NotFound';
 import SignIn from './components/pages/SignIn';
 import Wall from './components/pages/Wall';
 import ChatApp from './components/pages/ChatApp';
-// import PrivateRoute from './components/privateroute/PrivateRoute';
+import PrivateRoute from './components/privateroute/PrivateRoute';
 import GithubState from './context/github/GithubState';
 import AlertState from './context/alert/AlertState';
-import WallState from './context/wall/wallState';
 // import Login, { fakeAuth } from './components/privateroute/Login';
 
 import './App.css';
 import CurrentUserState from './context/currentUser/currentUserState';
-
+import WallState from './context/wall/wallState';
 // const PrivateRoute = ({ component: Component, ...rest }) => {
 //   return (
 //     <Route
