@@ -10,6 +10,7 @@ const db = require('./models');
 const app = express();
 app.use(bodyParser.json());
 
+
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -45,7 +46,6 @@ passport.use(
       gitHub(profile);
       createCurrentUser(profile, accessToken);
       console.log(profile);
-
       return cb(null, profile);
     }
   )
@@ -71,7 +71,6 @@ const gitHub = async (profileData, res) => {
 };
 
 const createCurrentUser = async (profileData, accessToken, res) => {
-  // console.log('TOOOOKENNNNNNNNN ' + accessToken);
   await db.CurrentUser.create({
     CurrentUserId: profileData.id,
     CurrentUserToken: accessToken,
@@ -93,6 +92,14 @@ passport.deserializeUser(function (obj, cb) {
   cb(null, obj);
 });
 
+// app.get(
+//   '/user',
+//   (req, res) => {
+//     console.log("(***************)")
+//     console.log(req.session)
+//     res.json()
+//   })
+
 app.get(
   '/auth/github',
   passport.authenticate('github', { scope: ['user:email'] })
@@ -102,9 +109,10 @@ app.get(
   '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
-    console.log('authenticated');
+    console.log('****************');
+    console.log(req.user)
     // Successful authentication, redirect home.
-    res.redirect('http://127.0.0.1:3000/home');
+    res.redirect('http://127.0.0.1:3000/home/' + req.user.username);
   }
 );
 
