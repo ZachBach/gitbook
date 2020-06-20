@@ -372,6 +372,12 @@ table th {
   display: flex;
 }
 
+.navbar li:hover{
+  color: rgb(11, 24, 24);
+  z-index: 101;
+  transform: scale(1.4);
+}
+
 .navbar a {
   color: #fff;
   padding: 0.45rem;

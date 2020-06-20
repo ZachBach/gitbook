@@ -1,21 +1,24 @@
 import React, { useContext, useEffect } from 'react';
 import { LikesContext } from '../../context/Likes/likesContext';
 
-
-const Likes = (props) => {
+const Likes = () => {
 
   const likesContext2 = useContext(LikesContext);
 
+  const { postid } = likesContext2;
+  
   useEffect(() => {
     likesContext2.onLoad()
   }, [])
-
+  
+  console.log(postid)
+  console.log('+++++++++++++++++++')
 
   return (
     <div className='col-4'>
       <button
-        type='button'
-        postid={props.postid}
+        type='button'       
+        // postid={props.postid}
         className='btn btn-primary'
         name='likesCount'
         value={likesContext2}

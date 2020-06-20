@@ -7,7 +7,7 @@ export default (state, action) => {
         ...state,
         postArray: action.payload,
         // id: action.payload.id,
-        // wallPostId: action.payload.wallPostId,
+        wallPostId: action.payload.wallPostId,
         // wallPostContent: action.payload.wallPostContent,
       };
     default:
