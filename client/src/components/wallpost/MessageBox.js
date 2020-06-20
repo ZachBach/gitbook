@@ -46,7 +46,10 @@ const MessageBox = () => {
           className='form-control'
           id='exampleFormControlTextarea1'
           rows='3'></textarea>
-        <button type='button' onClick={onsubmit} className='btn btn-primary'>
+        <button
+          type='button'
+          onClick={onsubmit}
+          className='btn btn-dark btn-block'>
           Submit
         </button>
       </div>

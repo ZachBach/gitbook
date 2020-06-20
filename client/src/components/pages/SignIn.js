@@ -7,44 +7,44 @@ import { CurrentUserContext } from '../../context/currentUser/currentUserContext
 function SignIn({ icon }) {
   const currentUserContext = useContext(CurrentUserContext);
 
-
   const handleClick = async () => {
-
     await currentUserContext.updateCurrentUser();
     fakeAuth.authenticate(currentUserContext.CurrentUserGitHubHandle);
   };
 
   const signOut = () => {
-
     // db.user.delete(currentUserContext.CurrentUserGitHubHandle)
-    localStorage.clear()
+    localStorage.clear();
 
-    const delCurrentUser = fetch('/api/delete/' + currentUserContext.CurrentUserGitHubHandle, {
-      method: 'DELETE',
-      // body: JSON.stringify(currentUserContext.CurrentUserId),
-      headers: {
-        'Content-type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
+    const delCurrentUser = fetch(
+      '/api/delete/' + currentUserContext.CurrentUserGitHubHandle,
+      {
+        method: 'DELETE',
+        // body: JSON.stringify(currentUserContext.CurrentUserId),
+        headers: {
+          'Content-type': 'application/json',
+          Accept: 'application/json',
+        },
+      }
+    )
       .then((data) => {
-        data.json()
-        console.log("THIS IS DATTTTTTTTA")
-        console.log(data)
+        data.json();
+        console.log('THIS IS DATTTTTTTTA');
+        console.log(data);
       })
       .then((result) => {
-        console.log("THIS BELOW IS REESULTTTTT")
-        console.log(result)
+        console.log('THIS BELOW IS REESULTTTTT');
+        console.log(result);
         return result;
       });
-    return delCurrentUser
-  }
+    return delCurrentUser;
+  };
 
-  const signInLink = `http://localhost:3001/auth/github`
-  const signOutLink = `/logout`
+  const signInLink = `http://localhost:3001/auth/github`;
+  const signOutLink = `/logout`;
 
-  const signInText = `Sign In with GitHub`
-  const signOutText = `Log Out`
+  const signInText = `Sign In with GitHub`;
+  const signOutText = `Log Out`;
 
   return (
     <div>
@@ -53,10 +53,23 @@ function SignIn({ icon }) {
         <div id='loginSection' className='row'>
           <div />
           <div className='form-group'> </div>
-          <a href={currentUserContext.CurrentUserGitHubHandle === undefined ? signInLink : signOutLink}>
-            <button className={icon} onClick={currentUserContext.CurrentUserGitHubHandle === null ? handleClick : signOut}>
+          <a
+            href={
+              currentUserContext.CurrentUserGitHubHandle === undefined
+                ? signInLink
+                : signOutLink
+            }>
+            <button
+              className={icon}
+              onClick={
+                currentUserContext.CurrentUserGitHubHandle === null
+                  ? handleClick
+                  : signOut
+              }>
               {' '}
-              {currentUserContext.CurrentUserGitHubHandle === undefined ? signInText : signOutText}
+              {currentUserContext.CurrentUserGitHubHandle === undefined
+                ? signInText
+                : signOutText}
             </button>
           </a>
         </div>
