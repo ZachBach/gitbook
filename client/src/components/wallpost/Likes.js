@@ -5,9 +5,7 @@ const Likes = (props) => {
   const likesContext2 = useContext(LikesContext);
 
   console.log(likesContext2);
-  // useEffect(() => {
-  //   likesContext2.onLoad();
-  // }, []);
+
 
   console.log(props);
   console.log('0000000000000000000000');
