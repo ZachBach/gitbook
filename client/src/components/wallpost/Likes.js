@@ -1,20 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { LikesContext } from '../../context/Likes/likesContext';
 
-<<<<<<< HEAD
-const Likes = () => {
-
-  const likesContext2 = useContext(LikesContext);
-
-  const { postid } = likesContext2;
-  
-  useEffect(() => {
-    likesContext2.onLoad()
-  }, [])
-  
-  console.log(postid)
-  console.log('+++++++++++++++++++')
-=======
 const Likes = (props) => {
   const likesContext2 = useContext(LikesContext);
 
@@ -22,7 +8,6 @@ const Likes = (props) => {
   // useEffect(() => {
   //   likesContext2.onLoad();
   // }, []);
->>>>>>> bf403932a274fc1b7f5a2ab78ab44b8a1d542655
 
   console.log(props);
   console.log('0000000000000000000000');
