@@ -1,8 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 /* Global Styles */
-.form-control {
-  /* height: auto !important; */
+
+.navbar li:hover {
+  color: rgb(11, 24, 24);
+  z-index: 0;
+  transform: scale(1.4);
 }
 
 :root {
@@ -10,7 +13,7 @@
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
-  --success-color: #28a745;
+  --success-color: #24ad44;
 }
 
 * {

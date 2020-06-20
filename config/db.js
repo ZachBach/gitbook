@@ -10,5 +10,4 @@ const connection = mysql.createPool({
   database: 'users_db'
 });
 
-
 module.exports = connection;

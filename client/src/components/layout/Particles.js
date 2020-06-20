@@ -34,7 +34,7 @@ let config = {
 
 const Particles = () => (
   <div>
-    <ParticlesBg type='cobweb' num={300} config={config} bg={true} />
+    <ParticlesBg type='cobweb' num={150} config={config} bg={true} />
   </div>
 );
 
