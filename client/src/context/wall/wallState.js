@@ -23,6 +23,8 @@ const WallState = (props) => {
     })
       .then((data) => data.json())
       .then((result) => {
+        console.log('this is the result in the wall state')
+        console.log(result)
         return result;
       });
 
@@ -31,6 +33,7 @@ const WallState = (props) => {
       payload: getWallPosts,
     });
   };
+
 
   return (
     <WallContext.Provider value={{ ...state, getAllWallPosts }}>

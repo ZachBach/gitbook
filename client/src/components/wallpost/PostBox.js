@@ -8,7 +8,7 @@ const PostBox = () => {
   const currentUserContext = useContext(CurrentUserContext);
   const wallContext = useContext(WallContext);
 
-  const { postArray } = wallContext;
+  const { postArray, wallPostId } = wallContext;
 
   useEffect(() => {
     wallContext.getAllWallPosts();
