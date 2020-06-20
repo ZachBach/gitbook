@@ -17,13 +17,14 @@ const PostBox = () => {
   return (
     <div>
       <div className='form-group'>
-        <label>{currentUserContext.CurrentUserGitHubHandle}</label>
+
         {postArray &&
           postArray.map((post) => {
             console.log('hjkadhjkadskhjashjkdashjkadhjkasdhjkadshjk');
             console.log(post);
             return (
               <div>
+                <label>{post.userid}</label>
                 <div className='form-control'>
                   <p key={post.id}> {post.wallPostContent} </p>
                 </div>
