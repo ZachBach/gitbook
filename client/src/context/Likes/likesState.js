@@ -51,6 +51,8 @@ const LikesState = (props) => {
   };
 
   const likeClicked = async (id) => {
+    console.log("Props")
+    console.log(props)
     fetch('/api/likes', {
       method: 'POST',
       body: JSON.stringify(state),
