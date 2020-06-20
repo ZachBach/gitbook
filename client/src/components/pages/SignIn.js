@@ -38,13 +38,8 @@ function SignIn({ icon }) {
     return delCurrentUser
   }
 
-<<<<<<< HEAD
-  const signInLink = `http://localhost:3001/auth/github`;
-  const signOutLink = `/logout`;
-=======
   const signInLink = `http://localhost:3001/auth/github`
   const signOutLink = `/logout`
->>>>>>>  msg username correctly populated
 
   const signInText = `Sign In with GitHub`
   const signOutText = `Log Out`
