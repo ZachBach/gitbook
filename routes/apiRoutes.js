@@ -10,11 +10,11 @@ router.get('/api/wallpost', (req, res) => {
   });
 });
 
-router.delete('/api/delete/:token', async (req, res) => {
+router.delete('/api/delete/:id', async (req, res) => {
   await db.CurrentUser.destroy({
     where: {
-      CurrentUserToken: req.params.token
-    }
+      CurrentUserGitHubHandle: req.params.id,
+    },
   })
     .then((result) => {
       res.json(result);
@@ -23,7 +23,6 @@ router.delete('/api/delete/:token', async (req, res) => {
       res.status(404).json(err);
     });
 });
-
 
 router.post('/api/likes', async (req, res) => {
   await db.Likes.create({
@@ -41,7 +40,7 @@ router.post('/api/likes', async (req, res) => {
 });
 
 router.get('/api/likes', (req, res) => {
-  db.CurrentUser.findAll({}).then((data) => {
+  db.Likes.findAll({}).then((data) => {
     console.log(data);
     res.json(data);
   });
@@ -67,7 +66,6 @@ router.get('/api/currentuser', (req, res) => {
     res.json(data);
   });
 });
-
 
 router.post('/api/wallpost', async (req, res) => {
   await db.WallPost.create({
@@ -108,7 +106,6 @@ router.post('/api/replypost', async (req, res) => {
     });
 });
 
-
 router.post('/api/signup', async (req, res) => {
   await db.User.create({
     firstName: req.body.firstName,
@@ -125,7 +122,6 @@ router.post('/api/signup', async (req, res) => {
 });
 
 module.exports = router;
-
 
 // router.post('/api/currentuser', async (req, res) => {
 //   await db.WallPost.create({

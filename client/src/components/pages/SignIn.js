@@ -1,33 +1,37 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useLayoutEffect, useContext } from 'react';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import '../styles/SignUp.css';
 import Particles from '../layout/Particles';
 import { CurrentUserContext } from '../../context/currentUser/currentUserContext';
-import db from '../../context/currentUser/DexieCurrentUser'
 
 function SignIn({ icon }) {
   const currentUserContext = useContext(CurrentUserContext);
 
 
-  const handleClick = async (e) => {
+  const handleClick = async () => {
     await currentUserContext.updateCurrentUser();
-    console.log('this is from SIGNINNNNN');
-    console.log(currentUserContext);
-    fakeAuth.authenticate(currentUserContext.CurrentUserToken);
+    fakeAuth.authenticate(currentUserContext.CurrentUserGitHubHandle);
   };
 
-  const signOut = async () => {
-    db.user.delete(currentUserContext.CurrentUserToken)
-    const delCurrentUser = await fetch('/api/delete/' + currentUserContext.CurrentUserToken, {
+  const signOut = () => {
+
+    // db.user.delete(currentUserContext.CurrentUserGitHubHandle)
+    localStorage.clear()
+    const delCurrentUser = fetch('/api/delete/' + currentUserContext.CurrentUserGitHubHandle, {
       method: 'DELETE',
-      body: JSON.stringify(currentUserContext.CurrentUserToken),
+      // body: JSON.stringify(currentUserContext.CurrentUserId),
       headers: {
         'Content-type': 'application/json',
         Accept: 'application/json',
       },
     })
-      .then((data) => data.json())
+      .then((data) => {
+        data.json()
+        console.log("THIS IS DATTTTTTTTA")
+        console.log(data)
+      })
       .then((result) => {
+        console.log("THIS BELOW IS REESULTTTTT")
         console.log(result)
         return result;
       });
@@ -35,7 +39,7 @@ function SignIn({ icon }) {
   }
 
   const signInLink = `http://localhost:3001/auth/github`
-  const signOutLink = `#`
+  const signOutLink = `/logout`
 
   const signInText = `Sign In with GitHub`
   const signOutText = `Log Out`
@@ -45,16 +49,29 @@ function SignIn({ icon }) {
       <Particles></Particles>
       <div className='container-fluid'>
         <div id='loginSection' className='row'>
-          <div />
+
           <div className='form-group'> </div>
-          <a href={currentUserContext.CurrentUserToken === null ? signInLink : signOutLink}>
-            <button className={icon} onClick={currentUserContext.CurrentUserToken === null ? handleClick : signOut}>
+          <a href={signInLink}>
+            <button className={icon} onClick={handleClick}>
               {' '}
-              {currentUserContext.CurrentUserToken === null ? signInText : signOutText}
+              {signInText}
             </button>
           </a>
         </div>
+
+        <div id='loginSection' className='row'>
+
+          <div className='form-group'> </div>
+          <a href={signOutLink}>
+            <button className={icon} onClick={signOut}>
+              {' '}
+              {signOutText}
+            </button>
+          </a>
+        </div>
+
       </div>
+
     </div>
   );
 }

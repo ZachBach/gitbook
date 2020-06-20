@@ -6,6 +6,7 @@ import { CurrentUserContext } from '../../context/currentUser/currentUserContext
 const Wall = () => {
   const currentUserContext = useContext(CurrentUserContext);
 
+  console.log(currentUserContext)
   useLayoutEffect(() => {
     currentUserContext.updateCurrentUser();
   }, []);
