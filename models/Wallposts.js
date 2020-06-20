@@ -7,6 +7,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     wallPostContent: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     userid: {
       type: DataTypes.STRING,
