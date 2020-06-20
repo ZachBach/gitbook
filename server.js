@@ -10,7 +10,6 @@ const db = require('./models');
 const app = express();
 app.use(bodyParser.json());
 
-
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -33,7 +32,8 @@ if (process.env.NODE_ENV === 'production') {
 // Use apiRoutes
 const GITHUB_CLIENT_ID = 'cd53ae7fdb8ecb986bf6';
 const GITHUB_CLIENT_SECRET = 'c21e415068681ae73258bd60a46d5fefc393d817';
-const GITHUB_CALLBACK_URL = 'http://127.0.0.1:3001/auth/github/callback';
+const GITHUB_CALLBACK_URL =
+  'https://gitcomm-it.herokuapp.com/auth/github/callback';
 
 passport.use(
   new GitHubStrategy(
@@ -110,9 +110,9 @@ app.get(
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
     console.log('****************');
-    console.log(req.user)
+    console.log(req.user);
     // Successful authentication, redirect home.
-    res.redirect('http://127.0.0.1:3000/home/' + req.user.username);
+    res.redirect('https://gitcomm-it.herokuapp.com/home/' + req.user.username);
   }
 );
 
