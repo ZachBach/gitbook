@@ -56,7 +56,7 @@ img {
 }
 
 /* Likes and Reply buttons */
-.row {
+.col-4 {
   padding: 0 0 1rem;
 }
 
