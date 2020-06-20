@@ -5,7 +5,7 @@ export default (state, action) => {
         case IS_AUTHENTICATED:
             return {
                 ...state,
-                // CurrentUserToken: action.payload.CurrentUserToken,
+
                 CurrentUserGitHubHandle: action.payload
             };
         default:

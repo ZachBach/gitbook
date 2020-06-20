@@ -73,18 +73,18 @@ const LikesState = (props) => {
   };
 
   const unlikeClicked = async () => {
-    fetch('/api/likes/:userid/:postid', {
-      method: 'DELETE',
-      body: JSON.stringify(state),
-      headers: {
-        'Content-type': 'application/json',
-        Accept: 'application/json',
-      },
-    })
-      .then((data) => data.json())
-      .then((result) => {
-        return result;
-      });
+    // fetch('/api/likes/:userid/:postid', {
+    //   method: 'DELETE',
+    //   body: JSON.stringify(state),
+    //   headers: {
+    //     'Content-type': 'application/json',
+    //     Accept: 'application/json',
+    //   },
+    // })
+    //   .then((data) => data.json())
+    //   .then((result) => {
+    //     return result;
+    //   });
     await dispatch({
       type: UNLIKED,
       payload: currentid,
