@@ -10,6 +10,7 @@ const db = require('./models');
 const app = express();
 app.use(bodyParser.json());
 
+
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -109,7 +110,7 @@ app.get(
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
     console.log('****************');
-    console.log(req.user);
+    console.log(req.user)
     // Successful authentication, redirect home.
     res.redirect('http://127.0.0.1:3000/home/' + req.user.username);
   }
