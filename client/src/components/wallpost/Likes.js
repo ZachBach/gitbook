@@ -16,7 +16,7 @@ const Likes = (props) => {
       <button
         type='button'
         postid={props.id}
-        className='btn btn-primary'
+        className='btn btn-success'
         name='likesCount'
         value={likesContext2}
         onClick={

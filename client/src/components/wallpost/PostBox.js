@@ -29,7 +29,7 @@ const PostBox = () => {
                 </div>
                 <div className='row'>
                   <Likes id={post.wallPostId} />
-                  <Reply />
+                  {/* <Reply /> */}
                 </div>
               </div>
             );

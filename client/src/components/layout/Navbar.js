@@ -6,7 +6,7 @@ import { CurrentUserContext } from '../../context/currentUser/currentUserContext
 const Navbar = ({ icon, title }) => {
   const currentUserContext = useContext(CurrentUserContext);
   return (
-    <nav className='navbar bg-primary'>
+    <nav className='navbar bg-success'>
       <h1>
         <i className={icon} /> {title}
       </h1>
