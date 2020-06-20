@@ -39,7 +39,7 @@ function SignIn({ icon }) {
     return delCurrentUser;
   };
 
-  const signInLink = `/auth/github`;
+  const signInLink = `http://localhost:3001/auth/github`;
   const signOutLink = `/logout`;
 
   const signInText = `Sign In with GitHub`;
