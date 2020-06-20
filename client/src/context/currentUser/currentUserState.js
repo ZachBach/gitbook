@@ -15,15 +15,8 @@ const CurrentUserState = (props) => {
         const loggedin = localStorage.getItem("user")
         let currentuser = window.location.href.substring(window.location.href.indexOf("home") + 5, window.location.href.length)
         console.log(loggedin)
-        console.log(currentuser + "empty?")
 
-        if (currentuser === "") {
-            dispatch({
-                type: IS_AUTHENTICATED,
-                payload: null,
-            });
-        }
-        else if (loggedin === null || loggedin.includes("/")) {
+        if (loggedin === null && currentuser !== "" || loggedin.includes("/")) {
             console.log("run dis shit")
             localStorage.setItem("user", currentuser)
             await dispatch({
@@ -39,7 +32,13 @@ const CurrentUserState = (props) => {
 
         }
 
-
+        //     else if (window.location.href.substring(window.location.href.indexOf("home") + 5, window.location.href.length) === "") {
+        // console.log("DIS BETTER NOT RUN")
+        // dispatch({
+        //     type: IS_AUTHENTICATED,
+        //     payload: null,
+        // });
+        // }
     }
 
 

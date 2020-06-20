@@ -20,7 +20,7 @@ const Likes = (props) => {
         onClick={
           likesContext2.status
             ? () => likesContext2.likeClicked(props.id)
-            : () => likesContext2.likeClicked(props.id)
+            : () => likesContext2.unlikeClicked(props.id)
         }>
         <i>
           <img
