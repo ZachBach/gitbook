@@ -17,7 +17,7 @@ const CurrentUserState = (props) => {
         console.log(loggedin)
 
         if (loggedin === null && currentuser !== "" || loggedin.includes("/")) {
-            console.log("run dis shit")
+
             localStorage.setItem("user", currentuser)
             await dispatch({
                 type: IS_AUTHENTICATED,

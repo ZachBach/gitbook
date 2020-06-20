@@ -24,7 +24,22 @@ router.delete('/api/delete/:id', async (req, res) => {
     });
 });
 
-router.post('/api/likes', async (req, res) => {
+router.delete('/api/likes/:userid/:postid', async (req, res) => {
+  await db.Likes.destroy({
+    where: {
+      userid: req.params.userid,
+      postid: req.params.postid
+    },
+  })
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((err) => {
+      res.status(404).json(err);
+    });
+});
+
+router.post('/api/likes/', async (req, res) => {
   await db.Likes.create({
     likescount: req.body.likesCount,
     status: req.body.status,

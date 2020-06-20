@@ -7,18 +7,18 @@ import { CurrentUserContext } from '../../context/currentUser/currentUserContext
 const LikesState = (props) => {
   const currentUserContext = useContext(CurrentUserContext);
   const currentUser = currentUserContext.CurrentUserGitHubHandle;
-  var currentid = props['children']['props']['children'][0]['props']['postid'];
+  // var currentid = props['children']['props']['children'][0]['props']['postid'];
   var initialState = {
     likesCount: 0,
     status: false,
-    postid: currentid,
+    postid: null,
     userid: currentUser,
   };
 
   const [state, dispatch] = useReducer(LikesReducer, initialState);
 
-  const getLikes = () => {
-    const getdata = fetch('/api/likes', {
+  const getLikes = (postid) => {
+    const getdata = fetch('/api/likes' + postid, {
       method: 'GET',
       headers: {
         'Content-type': 'application/json',
@@ -31,8 +31,7 @@ const LikesState = (props) => {
         data.json();
       })
       .then((result) => {
-        console.log(result);
-        console.log('jflasdjf;asdfasdf');
+
         return result;
       });
     return getdata;
@@ -51,9 +50,7 @@ const LikesState = (props) => {
   };
 
   const likeClicked = async (id) => {
-    console.log("Props")
-    console.log(props)
-    fetch('/api/likes', {
+    fetch('/api/likes/', {
       method: 'POST',
       body: JSON.stringify(state),
       headers: {
@@ -72,27 +69,26 @@ const LikesState = (props) => {
     });
   };
 
-  const unlikeClicked = async () => {
-    // fetch('/api/likes/:userid/:postid', {
-    //   method: 'DELETE',
-    //   body: JSON.stringify(state),
-    //   headers: {
-    //     'Content-type': 'application/json',
-    //     Accept: 'application/json',
-    //   },
-    // })
-    //   .then((data) => data.json())
-    //   .then((result) => {
-    //     return result;
-    //   });
+  const unlikeClicked = async (id) => {
+    fetch('/api/likes/' + currentUser + "/" + id, {
+      method: 'DELETE',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+      .then((data) => data.json())
+      .then((result) => {
+        return result;
+      });
     await dispatch({
       type: UNLIKED,
-      payload: currentid,
+      payload: id,
     });
   };
   return (
     <LikesContext.Provider
-      value={{ ...state, likeClicked, unlikeClicked, onLoad }}>
+      value={{ ...state, likeClicked, unlikeClicked, onLoad, getLikes }}>
       {props.children}
     </LikesContext.Provider>
   );

@@ -6,11 +6,8 @@ const Likes = (props) => {
 
   console.log(likesContext2);
 
-
-  console.log(props);
-  console.log('0000000000000000000000');
   return (
-    <div className='col-4'>
+    <div style={{ alignItems: "left" }}>
       <button
         type='button'
         postid={props.id}
@@ -19,8 +16,8 @@ const Likes = (props) => {
         value={likesContext2}
         onClick={
           likesContext2.status
-            ? () => likesContext2.likeClicked(props.id)
-            : () => likesContext2.unlikeClicked(props.id)
+            ? () => likesContext2.unlikeClicked(props.id)
+            : () => likesContext2.likeClicked(props.id)
         }>
         <i>
           <img
