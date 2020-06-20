@@ -7,24 +7,22 @@ function randomColor() {
   return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
 }
 
-const chatUsername = async () => {
-  const getCurrentUser = await fetch('/api/currentuser', {
-    method: 'GET',
-    headers: {
-      'Content-type': 'application/json',
-      Accept: 'application/json',
-    },
-  })
-    .then((data) => data.json())
-    .then((result) => {
-      console.log('---------inside dot then of chatUsername function-------');
-      console.log(result[0]);
-      return result[0];
-    });
-  return getCurrentUser;
-};
-
-const curuser = localStorage.getItem('user');
+// const chatUsername = async () => {
+//   const getCurrentUser = await fetch('/api/currentuser', {
+//     method: 'GET',
+//     headers: {
+//       'Content-type': 'application/json',
+//       Accept: 'application/json',
+//     },
+//   })
+//     .then((data) => data.json())
+//     .then((result) => {
+//       console.log('---------inside dot then of chatUsername function-------');
+//       console.log(result[0]);
+//       return result[0];
+//     });
+//   return getCurrentUser;
+// };
 
 class ChatApp extends Component {
   constructor() {
@@ -40,12 +38,12 @@ class ChatApp extends Component {
   }
 
   componentDidMount() {
-    chatUsername().then((gitHubHandle) => {
-      // this is where we will pass the Githubhandle below
-      this.startRoom(curuser);
-      this.setState({
-        member: { username: curuser },
-      });
+    const curuser = localStorage.getItem('user');
+
+    // this is where we will pass the Githubhandle below
+    this.startRoom(curuser);
+    this.setState({
+      member: { username: curuser },
     });
   }
 

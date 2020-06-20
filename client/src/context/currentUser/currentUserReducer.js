@@ -3,8 +3,6 @@ import { IS_AUTHENTICATED } from '../types';
 export default (state, action) => {
     switch (action.type) {
         case IS_AUTHENTICATED:
-            { console.log("--------------------------------------") }
-            { console.log(action.payload.CurrentUserGitHubHandle) }
             return {
                 ...state,
                 // CurrentUserToken: action.payload.CurrentUserToken,
