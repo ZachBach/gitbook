@@ -18,14 +18,29 @@ const CurrentUserState = (props) => {
 
 
     const updateCurrentUser = async () => {
+        const loggedin = localStorage.getItem("user")
+        console.log(loggedin)
+        console.log("this is state")
+        console.log(state)
+        let currentuser = window.location.href.substring(window.location.href.indexOf("home") + 5, window.location.href.length)
 
-        console.log(localStorage.getItem("user"))
-        const currentuser = window.location.href.substring(window.location.href.indexOf("home/") + 5, window.location.href.length)
-        console.log(
-            "-------"
-        )
+        if (loggedin === null || loggedin.includes("/")) {
+            console.log("run dis shit")
+            localStorage.setItem("user", currentuser)
+            await dispatch({
+                type: IS_AUTHENTICATED,
+                payload: currentuser,
+            });
+        }
+        else {
+            dispatch({
+                type: IS_AUTHENTICATED,
+                payload: loggedin,
+            });
 
-        localStorage.setItem("user", currentuser)
+        }
+
+
         // db.user
         //     .add({
         //         handle: currentuser,
@@ -63,10 +78,7 @@ const CurrentUserState = (props) => {
         //         .catch((err) => {
         //             console.log(err);
         //         });
-        dispatch({
-            type: IS_AUTHENTICATED,
-            payload: currentuser,
-        });
+
     }
     // const delCurrentUser = fetch('/api/delete/' + getCurrentUser.CurrentUserToken, {
     //     method: 'DELETE',
@@ -87,7 +99,6 @@ const CurrentUserState = (props) => {
     //     });
     // return delCurrentUser
     // }
-
 
     return (
         <CurrentUserContext.Provider value={{ ...state, updateCurrentUser }}>

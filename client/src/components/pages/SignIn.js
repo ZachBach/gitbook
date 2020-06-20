@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useLayoutEffect, useContext } from 'react';
 import { fakeAuth } from '../privateroute/PrivateRoute';
 import '../styles/SignUp.css';
 import Particles from '../layout/Particles';
@@ -9,7 +9,6 @@ function SignIn({ icon }) {
 
 
   const handleClick = async () => {
-
     await currentUserContext.updateCurrentUser();
     fakeAuth.authenticate(currentUserContext.CurrentUserGitHubHandle);
   };
@@ -18,7 +17,6 @@ function SignIn({ icon }) {
 
     // db.user.delete(currentUserContext.CurrentUserGitHubHandle)
     localStorage.clear()
-
     const delCurrentUser = fetch('/api/delete/' + currentUserContext.CurrentUserGitHubHandle, {
       method: 'DELETE',
       // body: JSON.stringify(currentUserContext.CurrentUserId),
@@ -51,16 +49,29 @@ function SignIn({ icon }) {
       <Particles></Particles>
       <div className='container-fluid'>
         <div id='loginSection' className='row'>
-          <div />
+
           <div className='form-group'> </div>
-          <a href={currentUserContext.CurrentUserGitHubHandle === undefined ? signInLink : signOutLink}>
-            <button className={icon} onClick={currentUserContext.CurrentUserGitHubHandle === null ? handleClick : signOut}>
+          <a href={signInLink}>
+            <button className={icon} onClick={handleClick}>
               {' '}
-              {currentUserContext.CurrentUserGitHubHandle === undefined ? signInText : signOutText}
+              {signInText}
             </button>
           </a>
         </div>
+
+        <div id='loginSection' className='row'>
+
+          <div className='form-group'> </div>
+          <a href={signOutLink}>
+            <button className={icon} onClick={signOut}>
+              {' '}
+              {signOutText}
+            </button>
+          </a>
+        </div>
+
       </div>
+
     </div>
   );
 }
