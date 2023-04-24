@@ -1,0 +1,15 @@
+export const SEARCH_USERS = 'SEARCH_USERS';
+export const GET_USER = 'GET_USER';
+export const CLEAR_USERS = 'CLEAR_USERS';
+export const GET_REPOS = 'GET_REPOS';
+export const SET_LOADING = 'SET_LOADING';
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_UP = 'SIGN_UP';
+export const LIKED = 'LIKED';
+export const IS_AUTHENTICATED = 'IS_AUTHENTICATED';
+export const WALL_POSTS = 'WALL_POSTS';
+export const UNLIKED = 'UNLIKED';
+export const LOAD = 'LOAD';
+export const REPLY_POSTS = 'REPLY_POSTS';
